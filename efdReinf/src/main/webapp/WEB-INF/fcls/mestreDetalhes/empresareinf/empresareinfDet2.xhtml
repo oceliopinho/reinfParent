@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['empresareinf.titulo.detalhe.2']}</legend>  
+			<plcf:iteracao var="empresaProxyReinf" id="empresaProxyReinf" value="#{empresareinf.empresaProxyReinf}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{empresaProxyReinf.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{empresaProxyReinf.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.proxyServer']}"/>
+					</f:facet>  
+					<plcf:texto id="proxyServer" value="#{empresaProxyReinf.proxyServer}" ajudaChave="ajuda.proxyServer" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.proxyUrl']}"/>
+					</f:facet>  
+					<plcf:texto id="proxyUrl" value="#{empresaProxyReinf.proxyUrl}" ajudaChave="ajuda.proxyUrl"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.proxyUser']}"/>
+					</f:facet>  
+					<plcf:texto id="proxyUser" value="#{empresaProxyReinf.proxyUser}" ajudaChave="ajuda.proxyUser" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.proxyPassword']}"/>
+					</f:facet>  
+					<plcf:texto id="proxyPassword" value="#{empresaProxyReinf.proxyPassword}" ajudaChave="ajuda.proxyPassword" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.proxyPorta']}"/>
+					</f:facet>  
+					<plcf:texto id="proxyPorta" value="#{empresaProxyReinf.proxyPorta}" ajudaChave="ajuda.proxyPorta" showRequired="true"/> 
+				</h:column> 
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

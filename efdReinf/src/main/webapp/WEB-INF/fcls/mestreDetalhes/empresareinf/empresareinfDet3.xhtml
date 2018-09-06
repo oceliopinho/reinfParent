@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['empresareinf.titulo.detalhe.3']}</legend>  
+			<plcf:iteracao var="empresaSmtpReinf" id="empresaSmtpReinf" value="#{empresareinf.empresaSmtpReinf}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{empresaSmtpReinf.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{empresaSmtpReinf.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpServer']}"/>
+					</f:facet>  
+					<plcf:texto id="smtpServer" value="#{empresaSmtpReinf.smtpServer}" ajudaChave="ajuda.smtpServer" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpUsuario']}"/>
+					</f:facet>  
+					<plcf:texto id="smtpUsuario" value="#{empresaSmtpReinf.smtpUsuario}" ajudaChave="ajuda.smtpUsuario" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpUsuarioNome']}"/>
+					</f:facet>  
+					<plcf:texto id="smtpUsuarioNome" value="#{empresaSmtpReinf.smtpUsuarioNome}" ajudaChave="ajuda.smtpUsuarioNome" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpSenha']}"/>
+					</f:facet>  
+					<plcf:texto id="smtpSenha" value="#{empresaSmtpReinf.smtpSenha}" ajudaChave="ajuda.smtpSenha" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpPorta']}"/>
+					</f:facet>  
+					<plcf:texto id="smtpPorta" value="#{empresaSmtpReinf.smtpPorta}" ajudaChave="ajuda.smtpPorta" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpCharset']}"/>
+					</f:facet>  
+					<plcf:texto id="smtpCharset" value="#{empresaSmtpReinf.smtpCharset}" ajudaChave="ajuda.smtpCharset" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpProtocolo']}"/>
+					</f:facet>  
+					<plcf:texto id="smtpProtocolo" value="#{empresaSmtpReinf.smtpProtocolo}" ajudaChave="ajuda.smtpProtocolo" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpHtml']}"/>
+					</f:facet>  
+					<plcf:caixaMarcacao id="smtpHtml" obrigatorio="N" value="#{empresaSmtpReinf.smtpHtml}" ajudaChave="ajuda.smtpHtml"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpStarttls']}"/>
+					</f:facet>  
+					<plcf:caixaMarcacao id="smtpStarttls" obrigatorio="N" value="#{empresaSmtpReinf.smtpStarttls}" ajudaChave="ajuda.smtpStarttls"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpAuth']}"/>
+					</f:facet>  
+					<plcf:caixaMarcacao id="smtpAuth" obrigatorio="N" value="#{empresaSmtpReinf.smtpAuth}" ajudaChave="ajuda.smtpAuth"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.smtpSsl']}"/>
+					</f:facet>  
+					<plcf:caixaMarcacao id="smtpSsl" obrigatorio="N" value="#{empresaSmtpReinf.smtpSsl}" ajudaChave="ajuda.smtpSsl"/> 
+				</h:column> 
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

@@ -1,0 +1,26 @@
+<facelet-taglib version="2.0" xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd">
+    
+	<namespace>http://www.powerlogic.com.br/plc</namespace>
+    
+    <tag>
+        <tag-name>dataTable</tag-name>
+        <component>
+            <component-type>PlcDataTable</component-type>
+        </component>
+    </tag>
+    
+    <tag>
+        <tag-name>vinculado</tag-name>
+        <component>
+            <component-type>PlcVinculado</component-type>
+            <handler-class>com.powerlogic.jcompany.view.jsf.handler.PlcAggregateHandler</handler-class>
+            <renderer-type>com.powerlogic.jcompany.view.jsf.renderer.PlcAggregateRenderer</renderer-type>
+        </component>
+        <attribute>
+        
+        </attribute>
+    </tag>
+    
+</facelet-taglib>

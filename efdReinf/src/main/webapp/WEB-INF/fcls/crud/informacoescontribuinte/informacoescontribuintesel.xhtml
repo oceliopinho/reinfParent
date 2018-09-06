@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml"> 
+		<ui:define name="plc-corpo-formulario"> 
+			<div id="plc-form-basico"> 
+				<div id="#{plcAliasPrefixoAction}Arg" class="plc-form-basico-topo"> 
+					<plcf:tabela tituloChave="informacoescontribuintearg.titulo"> 
+						<plcf:linha> 
+							<plcf:celula> 
+								<plcf:celula> 
+									<plcf:titulo value="#{msg['label.id']}"/>  
+									<plcf:numerico id="id" value="#{informacoescontribuinte.id}" ajudaChave="ajuda.id" tamanho="5"/> 
+								</plcf:celula> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:celula> 
+									<plcf:titulo value="#{msg['label.tipoAmbiente']}"/>  
+									<plcf:comboDinamico id="tipoAmbiente" value="#{informacoescontribuinte.tipoAmbiente}" dominio="TipoAmbienteEntity" exibeBranco="S" ajudaChave="ajuda.tipoAmbiente"/> 
+								</plcf:celula> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:celula> 
+									<plcf:titulo value="#{msg['label.empresaRaizCnpj']}"/>  
+									<plc:vinculado id="empresaRaizCnpj" value="#{informacoescontribuinte.empresaRaizCnpj}" propSelPop="cnpjEmpresaRaizReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.CnpjEmpresaRaizReinfEntity" actionSel="cnpjempresaraizreinfsel" modal="S" ajudaChave="ajuda.empresaRaizCnpj" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+								</plcf:celula> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:celula> 
+									<plcf:titulo value="#{msg['label.periodoApuracaoReinf']}"/>  
+									<plc:vinculado id="periodoApuracaoReinf" value="#{informacoescontribuinte.periodoApuracaoReinf}" propSelPop="periodoApuracaoReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.PeriodoApuracaoReinfEntity" actionSel="periodoapuracaoreinfsel" modal="S" ajudaChave="ajuda.periodoApuracaoReinf" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+								</plcf:celula> 
+							</plcf:celula> 
+						</plcf:linha> 
+					</plcf:tabela> 
+				</div>
+				<div id="#{plcAliasPrefixoAction}Sel" class="plc-form-basico-sel"> 
+					<script type="text/javascript">//<![CDATA[
+	jQuery(function(){plc.criaSelecaoJqGrid('plc-grid','plc-grid-navegador',{
+		evento:'${param.evento}',
+			modoJanelaPlc:'${param.modoJanelaPlc}',
+			rowNum:'20',
+			nomeLogica:'informacoescontribuinte',
+			propAgregada:'informacoescontribuinte',
+			jqGrid:{caption:
+				'#{msg['informacoescontribuinte.titulo']}',
+				colNames:
+					['#{msg['label.id']}',
+					'#{msg['label.tipoAmbiente']}',
+					'#{msg['label.empresaRaizCnpj']}',
+					'#{msg['label.periodoApuracaoReinf']}'],
+				colModel:[
+					{name:'id',index:'id'},
+					{name:'tipoAmbiente',index:'tipoAmbiente'},
+					{name:'empresaRaizCnpj',index:'empresaRaizCnpj'},
+					{name:'periodoApuracaoReinf',index:'periodoApuracaoReinf'}]},
+			urlEdicao:'#{request.contextPath}/f/n/informacoescontribuinteman'});});//]]> </script>  
+					<table id="plc-grid" width="100%" class="scroll" cellpadding="0" cellspacing="0"/>  
+					<div id="plc-grid-navegador" class="scroll" style="text-align:center;"/> 
+				</div> 
+			</div> 
+		</ui:define> 
+	</ui:composition> 
+</html>

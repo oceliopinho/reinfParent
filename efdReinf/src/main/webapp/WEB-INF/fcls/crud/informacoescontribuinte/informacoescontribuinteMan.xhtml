@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="informacoescontribuinteman.titulo"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.id']}"/>  
+					<plcf:oid id="id" value="#{informacoescontribuinte.id}" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tipoAmbiente']}"/>  
+					<plcf:comboDinamico id="tipoAmbiente" value="#{informacoescontribuinte.tipoAmbiente}" dominio="TipoAmbienteEntity" exibeBranco="S" ajudaChave="ajuda.tipoAmbiente" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tipoInscricao']}"/>  
+					<plcf:comboEstatico id="tipoInscricao" value="#{informacoescontribuinte.tipoInscricao}" dominio="TipoInscricao" exibeBranco="S" ajudaChave="ajuda.tipoInscricao" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empresaRaizCnpj']}"/>  
+					<plc:vinculado id="empresaRaizCnpj" value="#{informacoescontribuinte.empresaRaizCnpj}" propSelPop="cnpjEmpresaRaizReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.CnpjEmpresaRaizReinfEntity" actionSel="cnpjempresaraizreinfsel" modal="S" ajudaChave="ajuda.empresaRaizCnpj" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.periodoApuracaoReinf']}"/>  
+					<plc:vinculado id="periodoApuracaoReinf" value="#{informacoescontribuinte.periodoApuracaoReinf}" propSelPop="periodoApuracaoReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.PeriodoApuracaoReinfEntity" actionSel="periodoapuracaoreinfsel" modal="S" ajudaChave="ajuda.periodoApuracaoReinf" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.perApur']}"/>  
+					<plcf:texto id="perApur" value="#{informacoescontribuinte.perApur}" ajudaChave="ajuda.perApur" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.classificacaoTributaria']}"/>  
+					<plcf:comboDinamico id="classificacaoTributaria" value="#{informacoescontribuinte.classificacaoTributaria}" dominio="ClassificacaoTributariaEntity" exibeBranco="S" ajudaChave="ajuda.classificacaoTributaria" lookupTamanho="60" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.indEscrituracao']}"/>  
+					<plcf:comboEstatico id="indEscrituracao" value="#{informacoescontribuinte.indEscrituracao}" dominio="SimNao" exibeBranco="S" ajudaChave="ajuda.indEscrituracao" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.indDesoneracao']}"/>  
+					<plcf:comboEstatico id="indDesoneracao" value="#{informacoescontribuinte.indDesoneracao}" dominio="SimNao" exibeBranco="S" ajudaChave="ajuda.indDesoneracao" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.indAcordoIsenMulta']}"/>  
+					<plcf:comboEstatico id="indAcordoIsenMulta" value="#{informacoescontribuinte.indAcordoIsenMulta}" dominio="SimNao" exibeBranco="S" ajudaChave="ajuda.indAcordoIsenMulta" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.situacaoPessoaJuridica']}"/>  
+					<plcf:comboEstatico id="situacaoPessoaJuridica" value="#{informacoescontribuinte.situacaoPessoaJuridica}" dominio="SituacaoPessoaJuridica" exibeBranco="S" ajudaChave="ajuda.situacaoPessoaJuridica" showRequired="true"/> 
+				</plcf:celula>
+<!-- 				  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empresaContatoReinf']}"/>  
+					<plc:vinculado id="empresaContatoReinf" value="#{informacoescontribuinte.empresaContatoReinf}" propSelPop="empresaContatoReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.EmpresaContatoReinfEntity" actionSel="empresacontatoreinfsel" modal="S" ajudaChave="ajuda.empresaContatoReinf" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				</plcf:celula> 
+-->		
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empresaContatoReinf']}"/>  
+					<plc:vinculado id="empresa" value="#{informacoescontribuinte.empresaContatoReinf}" propSelPop="empresaReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.EmpresaReinfEntity" actionSel="empresareinfsel" modal="S" ajudaChave="ajuda.empresa" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				</plcf:celula> 		
+			</plcf:linha> 
+		</plcf:tabela> 
+	</ui:composition> 
+</html>

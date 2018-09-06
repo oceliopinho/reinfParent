@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['servicostomados.titulo.detalhe']}</legend>  
+			<plcf:iteracao var="servicosTomadosNfs" id="servicosTomadosNfs" value="#{servicostomados.servicosTomadosNfs}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{servicosTomadosNfs.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{servicosTomadosNfs.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.serie']}"/>
+					</f:facet>  
+					<plcf:texto id="serie" value="#{servicosTomadosNfs.serie}" ajudaChave="ajuda.serie" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.numDocto']}"/>
+					</f:facet>  
+					<plcf:texto id="numDocto" value="#{servicosTomadosNfs.numDocto}" ajudaChave="ajuda.numDocto" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.dtEmissaoNF']}"/>
+					</f:facet>  
+					<plcf:texto id="dtEmissaoNF" value="#{servicosTomadosNfs.dtEmissaoNF}" ajudaChave="ajuda.dtEmissaoNF" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.vlrBruto']}"/>
+					</f:facet>  
+					<plcf:numerico id="vlrBruto" value="#{servicosTomadosNfs.vlrBruto}" ajudaChave="ajuda.vlrBruto" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.obs']}"/>
+					</f:facet>  
+					<plcf:texto id="obs" value="#{servicosTomadosNfs.obs}" ajudaChave="ajuda.obs"/> 
+				</h:column> 
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

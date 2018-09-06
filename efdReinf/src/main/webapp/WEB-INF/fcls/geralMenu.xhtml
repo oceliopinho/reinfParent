@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+	<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets" xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:plcf="http://www.powerlogic.com.br/plcf">
+		<ul>
+			<li>
+				<a>
+					<span class="ico iLeiautepadrao"/>
+					<label jsfc="plcf:titulo" tituloChave="app.m.inicial">Principal</label>
+				</a>
+				<ul class="ui-state-hover">
+					<li>
+						<a href="#{request.contextPath}/f/n/tipoambiente">
+							<h:outputText value="#{msg['menu.tipoambiente.titulo']}">Tipo de Ambiente</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/tipoempresa">
+							<h:outputText value="#{msg['menu.tipoempresa.titulo']}">Tipo de Empresa</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/classificacaotributaria">
+							<h:outputText value="#{msg['menu.classificacaotributaria.titulo']}">Classificação Tributária</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/cnpjempresaraizreinf">
+							<h:outputText value="#{msg['menu.cnpjempresaraizreinf.titulo']}">Raiz Cnpj Empresa</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/modelodocreinf">
+							<h:outputText value="#{msg['menu.modelodocreinf.titulo']}">Modelo de Documento</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/paisesreinf">
+							<h:outputText value="#{msg['menu.paisesreinf.titulo']}">Paises</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/estadosreinf">
+							<h:outputText value="#{msg['menu.estadosreinf.titulo']}">Estados</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/cidadesreinf">
+							<h:outputText value="#{msg['menu.cidadesreinf.titulo']}">Cidades</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/empresareinf">
+							<h:outputText value="#{msg['menu.empresareinf.titulo']}">Empresa</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/periodoapuracaoreinf">
+							<h:outputText value="#{msg['menu.periodoapuracaoreinf.titulo']}">Periodo de Apuração Reinf</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/informacoescontribuinte">
+							<h:outputText value="#{msg['menu.informacoescontribuinte.titulo']}">Informações de Contribuinte</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/informacoescontribuinte">
+							<h:outputText value="#{msg['menu.informacoescontribuinte.titulo']}">Informações do Contribuinte</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/servicostomados">
+							<h:outputText value="#{msg['menu.servicostomados.titulo']}">Serviços Tomados</h:outputText>
+						</a>
+					</li>
+					<li>
+						<a href="#{request.contextPath}/f/n/reinfmensagens">
+							<h:outputText value="#{msg['menu.reinfmensagens.titulo']}">Mensagens Reinf</h:outputText>
+						</a>
+					</li>
+				</ul>
+			</li>
+			<ui:include src="/WEB-INF/fcls-plc/geralMenuAjuda.xhtml"/>
+			<ui:include src="/WEB-INF/fcls-plc/geralMenuPrefLang.xhtml"/>
+			<ui:include src="/WEB-INF/fcls-plc/geralMenuAreaTecnica.xhtml"/>
+			<ui:include src="/WEB-INF/fcls-plc/geralMenuDinamico.xhtml"/>
+			<ui:include src="/WEB-INF/fcls-plc/geralMenuThemeSwitcher.xhtml"/>
+		</ul>
+	</ui:composition>

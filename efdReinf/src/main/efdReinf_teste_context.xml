@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<Context displayName="efdReinf"  
+         docBase="efdReinf" 
+         path="efdReinf" 
+         privileged="true" swallowOutput="off">
+  
+    
+ <Resource name="jdbc/bridge" type="javax.sql.DataSource" 
+            maxActive="50" maxIdle="10" maxWait="10000"             
+            driverClassName="org.postgresql.Driver" 
+            url="jdbc:postgresql://localhost:5432/nfe" 
+            username="bridge" 
+            password="bridgeAdmin2305"/>
+
+   	<Resource name="jdbc/efdReinf" type="javax.sql.DataSource" 
+            maxActive="50" maxIdle="10" maxWait="10000"             
+            driverClassName="org.postgresql.Driver" 
+            url="jdbc:postgresql://localhost:5432/nfe" 
+            username="reinf" 
+            password="reinfAdmin2305"/>
+
+ <!-- JCDI / Weld (RI)  -->      
+ <Resource name="BeanManager"
+      auth="Container"
+      type="javax.enterprise.inject.spi.BeanManager"
+      factory="org.jboss.weld.resources.ManagerObjectFactory"/>
+ <!-- Uncomment to enable injection into Servlet -->
+ <!-- <Listener className="org.jboss.weld.environment.tomcat.WeldLifecycleListener"/>  -->   
+
+</Context>
+

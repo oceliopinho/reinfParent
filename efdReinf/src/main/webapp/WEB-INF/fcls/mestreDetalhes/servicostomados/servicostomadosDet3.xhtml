@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['servicostomados.titulo.detalhe.3']}</legend>  
+			<plcf:iteracao var="servicosTomadosProcRetPr" id="servicosTomadosProcRetPr" value="#{servicostomados.servicosTomadosProcRetPr}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{servicosTomadosProcRetPr.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{servicosTomadosProcRetPr.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.tpProcRetPrinc']}"/>
+					</f:facet>  
+					<plcf:numerico id="tpProcRetPrinc" value="#{servicosTomadosProcRetPr.tpProcRetPrinc}" ajudaChave="ajuda.tpProcRetPrinc" showRequired="false"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.tipoProcesso']}"/>
+					</f:facet>  
+					<plcf:comboEstatico id="tipoProcesso" value="#{servicosTomadosProcRetPr.tipoProcesso}" dominio="TipoProcesso" exibeBranco="S" ajudaChave="ajuda.tipoProcesso" showRequired="false"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.nrProcRetPrinc']}"/>
+					</f:facet>  
+					<plcf:texto id="nrProcRetPrinc" value="#{servicosTomadosProcRetPr.nrProcRetPrinc}" ajudaChave="ajuda.nrProcRetPrinc" showRequired="false"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.codSuspPrinc']}"/>
+					</f:facet>  
+					<plcf:numerico id="codSuspPrinc" value="#{servicosTomadosProcRetPr.codSuspPrinc}" ajudaChave="ajuda.codSuspPrinc" showRequired="false"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.valorPrinc']}"/>
+					</f:facet>  
+					<plcf:numerico id="valorPrinc" value="#{servicosTomadosProcRetPr.valorPrinc}" ajudaChave="ajuda.valorPrinc" showRequired="false"/> 
+				</h:column> 
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

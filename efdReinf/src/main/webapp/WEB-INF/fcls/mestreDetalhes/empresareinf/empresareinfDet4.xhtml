@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['empresareinf.titulo.detalhe.4']}</legend>  
+			<plcf:iteracao var="empresaContatoReinf" id="empresaReinf" value="#{empresareinf.empresaContatoReinf}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{empresaContatoReinf.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{empresaContatoReinf.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.cpfContato']}"/>
+					</f:facet>  
+					<plcf:texto id="cpfContato" value="#{empresaContatoReinf.cpfContato}" ajudaChave="ajuda.cpfContato" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.nomeContato']}"/>
+					</f:facet>  
+					<plcf:texto id="nomeContato" value="#{empresaContatoReinf.nomeContato}" ajudaChave="ajuda.nomeContato" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.foneContato']}"/>
+					</f:facet>  
+					<plcf:texto id="foneContato" value="#{empresaContatoReinf.foneContato}" ajudaChave="ajuda.foneContato" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.celularContato']}"/>
+					</f:facet>  
+					<plcf:texto id="celularContato" value="#{empresaContatoReinf.celularContato}" ajudaChave="ajuda.celularContato" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.emailContato']}"/>
+					</f:facet>  
+					<plcf:texto id="emailContato" value="#{empresaContatoReinf.emailContato}" ajudaChave="ajuda.emailContato" showRequired="true"/> 
+				</h:column>		
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

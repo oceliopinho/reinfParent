@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="empresareinf.mestre.titulo.comp"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.id']}"/>  
+					<plcf:oid id="id" value="#{empresareinf.id}" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empresaRaizCnpj']}"/>  
+					<plcf:comboDinamico id="empresaRaizCnpj" value="#{empresareinf.empresaRaizCnpj}" dominio="CnpjEmpresaRaizReinfEntity" exibeBranco="S" ajudaChave="ajuda.empresaRaizCnpj" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tipoEmpresa']}"/>  
+					<plcf:comboDinamico id="tipoEmpresa" value="#{empresareinf.tipoEmpresa}" dominio="TipoEmpresaEntity" exibeBranco="S" ajudaChave="ajuda.tipoEmpresa" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tipoAmbiente']}"/>  
+					<plcf:comboDinamico id="tipoAmbiente" value="#{empresareinf.tipoAmbiente}" dominio="TipoAmbienteEntity" exibeBranco="S" ajudaChave="ajuda.tipoAmbiente" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.modeloDoc']}"/>  
+					<plc:vinculado id="modeloDoc" value="#{empresareinf.modeloDoc}" propSelPop="modeloDocReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.tabelas.ModeloDocReinfEntity" actionSel="modelodocreinfsel" modal="S" ajudaChave="ajuda.modeloDoc" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empCnpjCpf']}"/>  
+					<plcf:texto id="empCnpjCpf" value="#{empresareinf.empCnpjCpf}" ajudaChave="ajuda.empCnpjCpf" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empXnome']}"/>  
+					<plcf:texto id="empXnome" value="#{empresareinf.empXnome}" ajudaChave="ajuda.empXnome" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empXfantasia']}"/>  
+					<plcf:texto id="empXfantasia" value="#{empresareinf.empXfantasia}" ajudaChave="ajuda.empXfantasia"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empXlgr']}"/>  
+					<plcf:texto id="empXlgr" value="#{empresareinf.empXlgr}" ajudaChave="ajuda.empXlgr" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empNro']}"/>  
+					<plcf:texto id="empNro" value="#{empresareinf.empNro}" ajudaChave="ajuda.empNro" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empXcpl']}"/>  
+					<plcf:texto id="empXcpl" value="#{empresareinf.empXcpl}" ajudaChave="ajuda.empXcpl"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empXbairro']}"/>  
+					<plcf:texto id="empXbairro" value="#{empresareinf.empXbairro}" ajudaChave="ajuda.empXbairro" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.paises']}"/>  
+					<plcf:comboDinamico id="paises" value="#{empresareinf.paises}" dominio="PaisesReinfEntity" exibeBranco="S" ajudaChave="ajuda.paises" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.estados']}"/>  
+					<plcf:comboDinamico id="estados" value="#{empresareinf.estados}" dominio="EstadosReinfEntity" exibeBranco="S" ajudaChave="ajuda.estados" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.cidades']}"/>  
+					<plcf:comboDinamico id="cidades" value="#{empresareinf.cidades}" dominio="CidadesReinfEntity" exibeBranco="S" ajudaChave="ajuda.cidades" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empCep']}"/>  
+					<plcf:texto id="empCep" value="#{empresareinf.empCep}" ajudaChave="ajuda.empCep" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empFone']}"/>  
+					<plcf:texto id="empFone" value="#{empresareinf.empFone}" ajudaChave="ajuda.empFone" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empIe']}"/>  
+					<plcf:texto id="empIe" value="#{empresareinf.empIe}" ajudaChave="ajuda.empIe" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empIeSt']}"/>  
+					<plcf:texto id="empIeSt" value="#{empresareinf.empIeSt}" ajudaChave="ajuda.empIeSt"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empIm']}"/>  
+					<plcf:texto id="empIm" value="#{empresareinf.empIm}" ajudaChave="ajuda.empIm"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empCnae']}"/>  
+					<plcf:texto id="empCnae" value="#{empresareinf.empCnae}" ajudaChave="ajuda.empCnae" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empSerie']}"/>  
+					<plcf:numerico id="empSerie" value="#{empresareinf.empSerie}" ajudaChave="ajuda.empSerie" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tipoCertificado']}"/>  
+					<plcf:comboEstatico id="tipoCertificado" value="#{empresareinf.tipoCertificado}" dominio="TipoCertificado" exibeBranco="S" ajudaChave="ajuda.tipoCertificado" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.modeloCertificado']}"/>  
+					<plcf:texto id="modeloCertificado" value="#{empresareinf.modeloCertificado}" ajudaChave="ajuda.modeloCertificado" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.nomeCertificado']}"/>  
+					<plcf:texto id="nomeCertificado" value="#{empresareinf.nomeCertificado}" ajudaChave="ajuda.nomeCertificado" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.senhaCertificado']}"/>  
+					<plcf:texto id="senhaCertificado" value="#{empresareinf.senhaCertificado}" ajudaChave="ajuda.senhaCertificado" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.validadeCert']}"/>  
+					<plcf:texto id="validadeCert" value="#{empresareinf.validadeCert}" ajudaChave="ajuda.validadeCert" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empDiretorio']}"/>  
+					<plcf:texto id="empDiretorio" value="#{empresareinf.empDiretorio}" ajudaChave="ajuda.empDiretorio" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tempoAtivarCont']}"/>  
+					<plcf:numerico id="tempoAtivarCont" value="#{empresareinf.tempoAtivarCont}" ajudaChave="ajuda.tempoAtivarCont" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.aliqIcms']}"/>  
+					<plcf:numerico id="aliqIcms" value="#{empresareinf.aliqIcms}" ajudaChave="ajuda.aliqIcms" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula columnSpan="3"> 
+					<plcf:titulo value="#{msg['label.verProcReinf']}"/>  
+					<plcf:texto id="verProcReinf" value="#{empresareinf.verProcReinf}" ajudaChave="ajuda.verProcReinf"/> 
+				</plcf:celula> 
+			</plcf:linha> 
+		</plcf:tabela> 
+	</ui:composition> 
+</html>

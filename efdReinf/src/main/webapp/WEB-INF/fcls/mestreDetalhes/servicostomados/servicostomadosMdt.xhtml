@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="servicostomados.mestre.titulo.comp"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.id']}"/>  
+					<plcf:oid id="id" value="#{servicostomados.id}" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.empresa']}"/>  
+					<plc:vinculado id="empresa" value="#{servicostomados.empresa}" propSelPop="empresaReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.EmpresaReinfEntity" actionSel="empresareinfsel" modal="S" ajudaChave="ajuda.empresa" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.perApur']}"/>  
+					<plcf:texto id="perApur" value="#{servicostomados.perApur}" ajudaChave="ajuda.perApur" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.periodoApuracaoReinf']}"/>  
+					<plcf:comboDinamico id="periodoApuracaoReinf" value="#{servicostomados.periodoApuracaoReinf}" dominio="PeriodoApuracaoReinfEntity" exibeBranco="S" ajudaChave="ajuda.periodoApuracaoReinf" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tipoAmbiente']}"/>  
+					<plcf:comboDinamico id="tipoAmbiente" value="#{servicostomados.tipoAmbiente}" dominio="TipoAmbienteEntity" exibeBranco="S" ajudaChave="ajuda.tipoAmbiente" showRequired="true"/> 
+				</plcf:celula> 
+	<!-- 		 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tpInsc']}"/>  
+					<plcf:comboEstatico id="tpInsc" value="#{servicostomados.tpInsc}" dominio="TipoInscricao" exibeBranco="S" ajudaChave="ajuda.tpInsc" showRequired="true"/> 
+				</plcf:celula> 
+				 -->	
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.nrInsc']}"/>  
+					<plcf:texto id="nrInsc" value="#{servicostomados.nrInsc}" ajudaChave="ajuda.nrInsc" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tpInscEstab']}"/>  
+					<plcf:comboEstatico id="tpInscEstab" value="#{servicostomados.tpInscEstab}" dominio="TipoInscricao" exibeBranco="S" ajudaChave="ajuda.tpInscEstab" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.nrInscEstab']}"/>  
+					<plcf:texto id="nrInscEstab" value="#{servicostomados.nrInscEstab}" ajudaChave="ajuda.nrInscEstab" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.indObra']}"/>  
+					<plcf:numerico id="indObra" value="#{servicostomados.indObra}" ajudaChave="ajuda.indObra" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.nomePrestador']}"/>  
+					<plcf:texto id="nomePrestador" value="#{servicostomados.nomePrestador}" ajudaChave="ajuda.nomePrestador" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.vlrTotalBruto']}"/>  
+					<plcf:numerico id="vlrTotalBruto" value="#{servicostomados.vlrTotalBruto}" ajudaChave="ajuda.vlrTotalBruto" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.vlrTotalBaseRet']}"/>  
+					<plcf:numerico id="vlrTotalBaseRet" value="#{servicostomados.vlrTotalBaseRet}" ajudaChave="ajuda.vlrTotalBaseRet" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.vlrTotalRetPrinc']}"/>  
+					<plcf:numerico id="vlrTotalRetPrinc" value="#{servicostomados.vlrTotalRetPrinc}" ajudaChave="ajuda.vlrTotalRetPrinc" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.vlrTotalRetAdic']}"/>  
+					<plcf:numerico id="vlrTotalRetAdic" value="#{servicostomados.vlrTotalRetAdic}" ajudaChave="ajuda.vlrTotalRetAdic" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.vlrTotalNRetPrinc']}"/>  
+					<plcf:numerico id="vlrTotalNRetPrinc" value="#{servicostomados.vlrTotalNRetPrinc}" ajudaChave="ajuda.vlrTotalNRetPrinc" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.vlrTotalNRetAdic']}"/>  
+					<plcf:numerico id="vlrTotalNRetAdic" value="#{servicostomados.vlrTotalNRetAdic}" ajudaChave="ajuda.vlrTotalNRetAdic" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.contribuinteCPRB']}"/>  
+					<plcf:comboEstatico id="contribuinteCPRB" value="#{servicostomados.contribuinteCPRB}" dominio="SimNao" exibeBranco="S" ajudaChave="ajuda.contribuinteCPRB" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.statusApuracaoReinf']}"/>  
+					<plcf:comboEstatico id="statusApuracaoReinf" value="#{servicostomados.statusApuracaoReinf}" dominio="StatusApuracaoReinf" exibeBranco="S" ajudaChave="ajuda.statusApuracaoReinf" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.valorBaseRetornoReceita']}"/>  
+					<plcf:numerico id="valorBaseRetornoReceita" value="#{servicostomados.valorBaseRetornoReceita}" ajudaChave="ajuda.valorBaseRetornoReceita"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.valorImpostoRetornoReceita']}"/>  
+					<plcf:numerico id="valorImpostoRetornoReceita" value="#{servicostomados.valorImpostoRetornoReceita}" ajudaChave="ajuda.valorImpostoRetornoReceita"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.dataReciboReceita']}"/>  
+					<plcf:data id="dataReciboReceita" value="#{servicostomados.dataReciboReceita}" ajudaChave="ajuda.dataReciboReceita"/> 
+				</plcf:celula>  
+				<plcf:celula columnSpan="2"> 
+					<plcf:titulo value="#{msg['label.nrRecibo']}"/>  
+					<plcf:texto id="nrRecibo" value="#{servicostomados.nrRecibo}" ajudaChave="ajuda.nrRecibo"/> 
+				</plcf:celula> 
+			</plcf:linha> 
+		</plcf:tabela> 
+	</ui:composition> 
+</html>
