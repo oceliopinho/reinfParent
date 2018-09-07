@@ -55,7 +55,7 @@ public abstract class ServicosTomadosNfs extends AppBaseEntity {
 	@Digits(integer=8, fraction=2)
 	private BigDecimal vlrBruto;
 	
-	@Size(max = 5)
+	@Size(max = 250)
 	private String obs;
 	
 	

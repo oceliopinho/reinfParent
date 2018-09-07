@@ -3,22 +3,16 @@ package br.com.pinhoinformatica.reinf.controller.jsf.servicostomados;
 import javax.enterprise.inject.Produces;
 import javax.inject.Named;
 
-
-import br.com.pinhoinformatica.reinf.entity.reinf.ServicosTomadosEntity;
-import br.com.pinhoinformatica.reinf.controller.jsf.AppMB;
-
 import com.powerlogic.jcompany.commons.annotation.PlcUriIoC;
 import com.powerlogic.jcompany.commons.config.stereotypes.SPlcMB;
-import com.powerlogic.jcompany.controller.jsf.annotations.PlcHandleException;
-import com.powerlogic.jcompany.config.collaboration.FormPattern;
-
-import com.powerlogic.jcompany.config.collaboration.PlcConfigFormLayout;
-import com.powerlogic.jcompany.config.collaboration.PlcConfigForm;
-import com.powerlogic.jcompany.config.collaboration.PlcConfigForm.ExclusionMode;
-
-
-
 import com.powerlogic.jcompany.config.aggregation.PlcConfigAggregation;
+import com.powerlogic.jcompany.config.collaboration.FormPattern;
+import com.powerlogic.jcompany.config.collaboration.PlcConfigForm;
+import com.powerlogic.jcompany.config.collaboration.PlcConfigFormLayout;
+import com.powerlogic.jcompany.controller.jsf.annotations.PlcHandleException;
+
+import br.com.pinhoinformatica.reinf.controller.jsf.AppMB;
+import br.com.pinhoinformatica.reinf.entity.reinf.ServicosTomadosEntity;
 
 @PlcConfigAggregation(
 		entity = br.com.pinhoinformatica.reinf.entity.reinf.ServicosTomadosEntity.class
@@ -64,7 +58,7 @@ public class ServicosTomadosMB extends AppMB  {
 	
      		
 	/**
-	* Entidade da ação injetado pela CDI
+	* Entidade da aÃ§Ã£o injetado pela CDI
 	*/
 	@Produces  @Named("servicostomados")
 	public ServicosTomadosEntity createEntityPlc() {

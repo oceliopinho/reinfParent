@@ -21,7 +21,7 @@ import javax.persistence.Access;
 
 @NamedQueries({
 	@NamedQuery(name="ServicosTomadosEntity.queryMan", query="from ServicosTomadosEntity"),
-	@NamedQuery(name="ServicosTomadosEntity.querySel", query="select obj.id as id, obj1.id as empresa_id , obj1.empCnpjCpf as empresa_empCnpjCpf, obj.perApur as perApur from ServicosTomadosEntity obj left outer join obj.empresa as obj1 order by obj.perApur asc"),
+	@NamedQuery(name="ServicosTomadosEntity.querySel", query="select obj.id as id, obj1.id as periodoApuracaoReinf_id , obj1.perApur as periodoApuracaoReinf_perApur, obj2.id as empresaRaizCnpj_id , obj2.cnpjRaiz as empresaRaizCnpj_cnpjRaiz, obj3.id as empresa_id , obj3.empCnpjCpf as empresa_empCnpjCpf from ServicosTomadosEntity obj left outer join obj.periodoApuracaoReinf as obj1 left outer join obj.empresaRaizCnpj as obj2 left outer join obj.empresa as obj3 order by obj.id asc"),
 	@NamedQuery(name="ServicosTomadosEntity.querySelLookup", query="select id as id, perApur as perApur from ServicosTomadosEntity where id = ? order by id asc")
 })
 public class ServicosTomadosEntity extends ServicosTomados {

@@ -23,20 +23,20 @@
 							</plcf:celula>  
 							<plcf:celula> 
 								<plcf:celula> 
+									<plcf:titulo value="#{msg['label.periodoApuracaoReinf']}"/>  
+									<plc:vinculado id="periodoApuracaoReinf" value="#{servicostomados.periodoApuracaoReinf}" propSelPop="periodoApuracaoReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.PeriodoApuracaoReinfEntity" actionSel="periodoapuracaoreinfsel" modal="S" ajudaChave="ajuda.periodoApuracaoReinf" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+								</plcf:celula> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:celula> 
+									<plcf:titulo value="#{msg['label.empresaRaizCnpj']}"/>  
+									<plc:vinculado id="empresaRaizCnpj" value="#{servicostomados.empresaRaizCnpj}" propSelPop="cnpjEmpresaRaizReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.CnpjEmpresaRaizReinfEntity" actionSel="cnpjempresaraizreinfsel" modal="S" ajudaChave="ajuda.empresaRaizCnpj" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+								</plcf:celula> 
+							</plcf:celula>  
+							<plcf:celula> 
+								<plcf:celula> 
 									<plcf:titulo value="#{msg['label.empresa']}"/>  
 									<plc:vinculado id="empresa" value="#{servicostomados.empresa}" propSelPop="empresaReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.EmpresaReinfEntity" actionSel="empresareinfsel" modal="S" ajudaChave="ajuda.empresa" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
-								</plcf:celula> 
-							</plcf:celula>  
-							<plcf:celula> 
-								<plcf:celula> 
-									<plcf:titulo value="#{msg['label.perApur']}"/>  
-									<plcf:texto id="perApur" value="#{servicostomados.perApur}" ajudaChave="ajuda.perApur"/> 
-								</plcf:celula> 
-							</plcf:celula>  
-							<plcf:celula> 
-								<plcf:celula> 
-									<plcf:titulo value="#{msg['label.nrInscEstab']}"/>  
-									<plcf:texto id="nrInscEstab" value="#{servicostomados.nrInscEstab}" ajudaChave="ajuda.nrInscEstab"/> 
 								</plcf:celula> 
 							</plcf:celula> 
 						</plcf:linha> 
@@ -54,14 +54,14 @@
 				'#{msg['servicostomados.titulo']}',
 				colNames:
 					['#{msg['label.id']}',
-					'#{msg['label.empresa']}',
-					'#{msg['label.perApur']}',
-					'#{msg['label.nrInscEstab']}'],
+					'#{msg['label.periodoApuracaoReinf']}',
+					'#{msg['label.empresaRaizCnpj']}',
+					'#{msg['label.empresa']}'],
 				colModel:[
 					{name:'id',index:'id'},
-					{name:'empresa',index:'empresa'},
-					{name:'perApur',index:'perApur'},
-					{name:'nrInscEstab',index:'nrInscEstab'}]},
+					{name:'periodoApuracaoReinf',index:'periodoApuracaoReinf'},
+					{name:'empresaRaizCnpj',index:'empresaRaizCnpj'},
+					{name:'empresa',index:'empresa'}]},
 			urlEdicao:'#{request.contextPath}/f/n/servicostomadosmdt'});});//]]> </script>  
 					<table id="plc-grid" width="100%" class="scroll" cellpadding="0" cellspacing="0"/>  
 					<div id="plc-grid-navegador" class="scroll" style="text-align:center;"/> 
