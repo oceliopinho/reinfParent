@@ -20,6 +20,8 @@ import javax.persistence.Access;
 
 
 @NamedQueries({
+	@NamedQuery(name="ReinfLotesEntity.queryMan", query="from ReinfLotesEntity"),
+	@NamedQuery(name="ReinfLotesEntity.querySel", query="select obj.id as id, obj1.id as cnpjEmpresaRaizReinf_id , obj1.cnpjRaiz as cnpjEmpresaRaizReinf_cnpjRaiz, obj.statusLoteReinf as statusLoteReinf, obj2.id as periodoApuracaoReinf_id , obj2.perApur as periodoApuracaoReinf_perApur, obj.cnpjPrestador as cnpjPrestador from ReinfLotesEntity obj left outer join obj.cnpjEmpresaRaizReinf as obj1 left outer join obj.periodoApuracaoReinf as obj2 order by obj.cnpjPrestador asc"),
 	@NamedQuery(name="ReinfLotesEntity.querySelLookup", query="select id as id, numLote as numLote from ReinfLotesEntity where id = ? order by id asc")
 })
 public class ReinfLotesEntity extends ReinfLotes {

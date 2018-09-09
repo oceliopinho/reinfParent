@@ -6,9 +6,7 @@ package br.com.pinhoinformatica.reinf.entity.dominio;
 public enum StatusApuracaoReinf {
     
 	Aberto("{statusApuracaoReinf.Aberto}"),
-	CargaR2010Realizada("{statusApuracaoReinf.CargaR2010Realizada}"),
-	CargaR2010Revertida("{statusApuracaoReinf.CargaR2010Revertida}"),
-	CargaR2099Realizada("{statusApuracaoReinf.CargaR2099Realizada}"),
+	Gerado("{statusApuracaoReinf.Gerado}"),
 	Fechado("{statusApuracaoReinf.Fechado}");
 
 	

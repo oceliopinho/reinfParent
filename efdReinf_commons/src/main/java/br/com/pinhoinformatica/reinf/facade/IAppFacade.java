@@ -10,5 +10,9 @@ public interface IAppFacade extends IPlcFacade {
 	Integer removerArquivos(File f) throws IOException;
 	
 	String criarPeriodoReinf();
+
+	String gerarPeriodoReinf(IAppFacade facade, String login, Long idPeriodo);
+
+	void enviarEmailException(String subject, String bodyMail, Boolean emailAttachment);
 	
 }

@@ -63,6 +63,8 @@
 		<class>br.com.pinhoinformatica.reinf.entity.reinf.ReinfMensagensEntity</class>
 	
 		<class>br.com.pinhoinformatica.reinf.entity.reinf.ReinfLotesEventosRetornoEntity</class>
+	
+		<class>br.com.pinhoinformatica.reinf.entity.reinf.ReinfLotesEfdReceitaEntity</class>
 	<properties>			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.show_sql" value="true"/>

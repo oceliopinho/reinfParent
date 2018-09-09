@@ -26,4 +26,12 @@ public class AppFacadeImpl extends PlcFacadeImpl implements IAppFacade {
 	public String criarPeriodoReinf() {
 		return periodoApuracaoReinfRepository.criarPeriodoReinf();
 	}
+	
+	public String gerarPeriodoReinf(IAppFacade facade, String login, Long idPeriodo) {
+		return periodoApuracaoReinfRepository.gerarPeriodoReinf(facade, login, idPeriodo);
+	}
+	
+	public void enviarEmailException(String subject, String bodyMail, Boolean emailAttachment) {
+		
+	}
 }

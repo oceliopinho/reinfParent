@@ -1,8 +1,10 @@
 package br.com.pinhoinformatica.reinf.entity.reinf;
 
 import br.com.pinhoinformatica.reinf.entity.AppBaseEntity;
+import br.com.pinhoinformatica.reinf.entity.dominio.IndSituacaoPessoaJuridica;
 import br.com.pinhoinformatica.reinf.entity.dominio.SimNao;
 import br.com.pinhoinformatica.reinf.entity.dominio.SituacaoPessoaJuridica;
+import br.com.pinhoinformatica.reinf.entity.dominio.TipoCadastroContribuinte;
 import br.com.pinhoinformatica.reinf.entity.dominio.TipoInscricao;
 import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbiente;
 import javax.persistence.ManyToOne;
@@ -31,7 +33,10 @@ public abstract class InformacoesContribuinte extends AppBaseEntity {
 	@Column(name="ID_INFORMACOES_CONTRIBUINTE")
 	private Long id;
 
-
+	@Enumerated(EnumType.STRING)
+	@NotNull
+	@Column(length=1)
+	private TipoCadastroContribuinte tipoCadastroContribuinte;
 	
 	@ManyToOne (targetEntity = TipoAmbienteEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_INFORMACOESCONTRIBUINTE_TIPOAMBIENTE")
@@ -79,8 +84,8 @@ public abstract class InformacoesContribuinte extends AppBaseEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull
-	@Column(length=5)
-	private SituacaoPessoaJuridica situacaoPessoaJuridica;
+	@Column(length=6)
+	private IndSituacaoPessoaJuridica indSituacaoPessoaJuridica;
 	
 	@ManyToOne (targetEntity = EmpresaReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_SERVICOSTOMADOS_EMPRESA")
@@ -167,14 +172,6 @@ public abstract class InformacoesContribuinte extends AppBaseEntity {
 		this.indAcordoIsenMulta=indAcordoIsenMulta;
 	}
 
-	public SituacaoPessoaJuridica getSituacaoPessoaJuridica() {
-		return situacaoPessoaJuridica;
-	}
-
-	public void setSituacaoPessoaJuridica(SituacaoPessoaJuridica situacaoPessoaJuridica) {
-		this.situacaoPessoaJuridica=situacaoPessoaJuridica;
-	}
-
 	public EmpresaReinf getEmpresaContatoReinf() {
 		return empresaContatoReinf;
 	}
@@ -182,4 +179,20 @@ public abstract class InformacoesContribuinte extends AppBaseEntity {
 	public void setEmpresaContatoReinf(EmpresaReinf empresaContatoReinf) {
 		this.empresaContatoReinf = empresaContatoReinf;
 	}
+
+	public TipoCadastroContribuinte getTipoCadastroContribuinte() {
+		return tipoCadastroContribuinte;
+	}
+
+	public void setTipoCadastroContribuinte(TipoCadastroContribuinte tipoCadastroContribuinte) {
+		this.tipoCadastroContribuinte = tipoCadastroContribuinte;
+	}
+
+	public IndSituacaoPessoaJuridica getIndSituacaoPessoaJuridica() {
+		return indSituacaoPessoaJuridica;
+	}
+
+	public void setIndSituacaoPessoaJuridica(IndSituacaoPessoaJuridica indSituacaoPessoaJuridica) {
+		this.indSituacaoPessoaJuridica = indSituacaoPessoaJuridica;
+	}	
 }

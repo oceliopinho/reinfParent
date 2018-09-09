@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<plcf:tabela tituloChave="reinflotes.mestre.titulo.comp"> 
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.id']}"/>  
+					<plcf:oid id="id" value="#{reinflotes.id}" ajudaChave="ajuda.id"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.cnpjEmpresaRaizReinf']}"/>  
+					<plc:vinculado id="cnpjEmpresaRaizReinf" value="#{reinflotes.cnpjEmpresaRaizReinf}" propSelPop="cnpjEmpresaRaizReinf" idExibe="S" idSomenteLeitura="N" autoRecuperacaoClasse="br.com.pinhoinformatica.reinf.entity.reinf.CnpjEmpresaRaizReinfEntity" actionSel="cnpjempresaraizreinfsel" modal="S" ajudaChave="ajuda.cnpjEmpresaRaizReinf" onkeydown="selecionaPorTecla(event,this);" obrigatorio="S"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.statusLoteReinf']}"/>  
+					<plcf:comboEstatico id="statusLoteReinf" value="#{reinflotes.statusLoteReinf}" dominio="StatusLoteReinf" exibeBranco="S" ajudaChave="ajuda.statusLoteReinf" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.periodoApuracaoReinf']}"/>  
+					<plcf:comboDinamico id="periodoApuracaoReinf" value="#{reinflotes.periodoApuracaoReinf}" dominio="PeriodoApuracaoReinfEntity" exibeBranco="S" ajudaChave="ajuda.periodoApuracaoReinf" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.tipoAmbiente']}"/>  
+					<plcf:comboDinamico id="tipoAmbiente" value="#{reinflotes.tipoAmbiente}" dominio="TipoAmbienteEntity" exibeBranco="S" ajudaChave="ajuda.tipoAmbiente" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.numLote']}"/>  
+					<plcf:texto id="numLote" value="#{reinflotes.numLote}" ajudaChave="ajuda.numLote" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.dataGeracao']}"/>  
+					<plcf:texto id="dataGeracao" value="#{reinflotes.dataGeracao}" ajudaChave="ajuda.dataGeracao" tamanho="10" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.cnpjPrestador']}"/>  
+					<plcf:texto id="cnpjPrestador" value="#{reinflotes.cnpjPrestador}" ajudaChave="ajuda.cnpjPrestador" showRequired="true"/> 
+				</plcf:celula>  
+				<plcf:celula> 
+					<plcf:titulo value="#{msg['label.valorBaseInss']}"/>  
+					<plcf:numerico id="valorBaseInss" value="#{reinflotes.valorBaseInss}" ajudaChave="ajuda.valorBaseInss" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha>  
+			<plcf:linha> 
+				<plcf:celula columnSpan="3"> 
+					<plcf:titulo value="#{msg['label.valorImpostoInss']}"/>  
+					<plcf:numerico id="valorImpostoInss" value="#{reinflotes.valorImpostoInss}" ajudaChave="ajuda.valorImpostoInss" showRequired="true"/> 
+				</plcf:celula> 
+			</plcf:linha> 
+		</plcf:tabela> 
+	</ui:composition> 
+</html>

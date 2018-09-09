@@ -95,7 +95,7 @@ public class PeriodoApuracaoReinfDAO extends AppJpaDAO  {
 		return null;
 	}
 	
-	public void inserirManifestoNfe(Connection conn, String dataCompetencia, String strApur, String status) {		
+	public void inserirStatusPeriodoApuracao(Connection conn, String dataCompetencia, String strApur, String status) {		
 		String sql1 = " INSERT INTO reinf.tb_periodo_apuracao_reinf(id_periodo_apuracao_reinf, competencia, per_apur, status_apuracao_reinf) VALUES (nextval('reinf.se_periodo_apuracao_reinf'), '" + dataCompetencia + "', '" + strApur + "', '" + status + "'); ";		
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(sql1);
@@ -103,7 +103,7 @@ public class PeriodoApuracaoReinfDAO extends AppJpaDAO  {
 		} catch (PlcException plcE) {
 			throw plcE;
 		} catch (Exception e) {
-			throw new PlcException("NfeManifestoDAO", "inserirManifestoNfe", e, log,"");
+			throw new PlcException("PeriodoApuracaoReinfDAO", "inserirStatusPeriodoApuracao", e, log,"");
 		} finally {
 			try {
 				conn.commit();
@@ -134,6 +134,28 @@ public class PeriodoApuracaoReinfDAO extends AppJpaDAO  {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public void updateStatusPeriodoApuracao(Connection conn, Long idPeriodo, String status) {		
+		String sql1 = " Update reinf.tb_periodo_apuracao_reinf ";
+		sql1       += " set status_apuracao_reinf = '" + status + "', ";
+		sql1       += "     versao = versao +1 ";
+		sql1       += " Where id_periodo_apuracao_reinf = " + idPeriodo + "";
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(sql1);
+			pstmt.executeUpdate();
+		} catch (PlcException plcE) {
+			throw plcE;
+		} catch (Exception e) {
+			throw new PlcException("PeriodoApuracaoReinfDAO", "inserirManifestoNfe", e, log,"");
+		} finally {
+			try {
+				conn.commit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

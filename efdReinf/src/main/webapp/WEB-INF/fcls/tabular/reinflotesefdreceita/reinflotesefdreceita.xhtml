@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition template="/fcls/template/PlcGeralTemplate.xhtml"> 
+		<ui:define name="plc-corpo-formulario"> 
+			<div id="plc-corpo-formulario" class="plc-corpo-formulario plc-form-tabular"> 
+				<fieldset class="plc-fieldset"> 
+					<legend class="plc-fieldset-legend">#{msg['reinflotesefdreceita.titulo']}</legend>  
+					<plcf:iteracao var="reinflotesefdreceita" id="reinflotesefdreceita" value="#{reinflotesefdreceitaLista.itensPlc}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+						<h:column> 
+							<h:outputText value="#{rowCounter.index}."/> 
+						</h:column>  
+						<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+							<f:facet name="header">
+								<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+							</f:facet>  
+							<span class="celulaFormularioCaixaMarcacao">
+								<plcf:caixaExclusao id="indExcPlc" value="#{reinflotesefdreceita.indExcPlc}"/>
+							</span> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.id']}"/>
+							</f:facet>  
+							<plcf:oid id="id" value="#{reinflotesefdreceita.id}" ajudaChave="ajuda.id"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.attribute1']}"/>
+							</f:facet>  
+							<plcf:texto id="attribute1" value="#{reinflotesefdreceita.attribute1}" ajudaChave="ajuda.attribute1" showRequired="true"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.numLote']}"/>
+							</f:facet>  
+							<plcf:texto id="numLote" value="#{reinflotesefdreceita.numLote}" ajudaChave="ajuda.numLote" showRequired="true"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.dataCriacao']}"/>
+							</f:facet>  
+							<plcf:data id="dataCriacao" value="#{reinflotesefdreceita.dataCriacao}" ajudaChave="ajuda.dataCriacao" showRequired="true"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.usuarioCriacao']}"/>
+							</f:facet>  
+							<plcf:texto id="usuarioCriacao" value="#{reinflotesefdreceita.usuarioCriacao}" ajudaChave="ajuda.usuarioCriacao" showRequired="true"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.dataRetornoReceita']}"/>
+							</f:facet>  
+							<plcf:texto id="dataRetornoReceita" value="#{reinflotesefdreceita.dataRetornoReceita}" ajudaChave="ajuda.dataRetornoReceita" tamanho="10"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.usuarioRetornoReceita']}"/>
+							</f:facet>  
+							<plcf:texto id="usuarioRetornoReceita" value="#{reinflotesefdreceita.usuarioRetornoReceita}" ajudaChave="ajuda.usuarioRetornoReceita"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.dataExclusaoLote']}"/>
+							</f:facet>  
+							<plcf:texto id="dataExclusaoLote" value="#{reinflotesefdreceita.dataExclusaoLote}" ajudaChave="ajuda.dataExclusaoLote" tamanho="10"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.usuarioExclusaoLote']}"/>
+							</f:facet>  
+							<plcf:texto id="usuarioExclusaoLote" value="#{reinflotesefdreceita.usuarioExclusaoLote}" ajudaChave="ajuda.usuarioExclusaoLote"/> 
+						</h:column>  
+						<h:column> 
+							<f:facet name="header">
+								<plcf:titulo value="#{msg['label.numeroRecibo']}"/>
+							</f:facet>  
+							<plcf:texto id="numeroRecibo" value="#{reinflotesefdreceita.numeroRecibo}" ajudaChave="ajuda.numeroRecibo"/> 
+						</h:column> 
+					</plcf:iteracao> 
+				</fieldset> 
+			</div> 
+		</ui:define> 
+	</ui:composition> 
+</html>

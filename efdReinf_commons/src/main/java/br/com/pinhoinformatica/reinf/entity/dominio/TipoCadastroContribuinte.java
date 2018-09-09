@@ -3,16 +3,11 @@ package br.com.pinhoinformatica.reinf.entity.dominio;
 /**
  * Enum de domínio discreto gerada automaticamente pelo assistente do jCompany.
  */
-public enum StatusLoteReinf {
+public enum TipoCadastroContribuinte {
     
-	N("{statusLoteReinf.N}"),
-	EWS("{statusLoteReinf.EWS}"),
-	A("{statusLoteReinf.A}"),
-	V("{statusLoteReinf.V}"),
-	EV("{statusLoteReinf.EV}"),
-	AR("{statusLoteReinf.AR}"),
-	EAR("{statusLoteReinf.EAR}"),
-	RCR("{statusLoteReinf.RCR}");
+	A("{tipoCadastroContribuinte.A}"),
+	I("{tipoCadastroContribuinte.I}"),
+	E("{tipoCadastroContribuinte.E}");
 
 	
     /**
@@ -21,7 +16,7 @@ public enum StatusLoteReinf {
      
 	private String label;
     
-    private StatusLoteReinf(String label) {
+    private TipoCadastroContribuinte(String label) {
     	this.label = label;
     }
      

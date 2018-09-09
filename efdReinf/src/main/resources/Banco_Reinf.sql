@@ -43,7 +43,6 @@ ALTER DATABASE nfe SET search_path=nfe;
  drop sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_AD;
  drop sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_PR;
  drop sequence hibernate_sequence;
-
  
  create table reinf.tb_classificacao_tributaria (
     id_classificacao_tributaria bigint not null,
@@ -56,6 +55,7 @@ ALTER DATABASE nfe SET search_path=nfe;
 );
  create table reinf.tb_informacoes_contribuinte (
     id_informacoes_contribuinte bigint not null,
+    tipo_cadastro_contribuinte  varchar(1) not null,
     tipo_ambiente               bigint not null,
     periodo_apuracao_reinf      bigint not null,
     per_apur                    varchar(7) not null,
@@ -84,7 +84,7 @@ ALTER DATABASE nfe SET search_path=nfe;
     sit_historico_plc           varchar(1) default 'A' not null,   
     primary key (id_periodo_apuracao_reinf)
 );
-create table bridge.tb_reinf_lotes (
+create table reinf.tb_reinf_lotes ( 
     id_reinf_lotes              bigint not null,
     cnpj_empresa_raiz_reinf     bigint not null,
     periodo_apuracao_reinf      bigint not null,
@@ -186,7 +186,6 @@ create table reinf.tb_reinf_mensagens (
     sit_historico_plc           varchar(1) default 'A' not null,     
     primary key (id_servicos_tomados_nfs)
 );
-
  create table reinf.tb_servicos_tomados_proc_ret_ad (
     id_servicos_tomados_proc_ret_ad bigint not null,
     servicos_tomados                bigint,
@@ -215,6 +214,28 @@ create table reinf.tb_reinf_mensagens (
     sit_historico_plc               varchar(1) default 'A' not null,     
     primary key (id_servicos_tomados_proc_ret_pr)
 );
+ create table reinf.tb_reinf_lotes_efd_receita (
+    id_reinf_lotes_efd_receita  bigint not null,    
+    status_lote_reinf           varchar(5) not null,
+    evento                      varchar(6) not null,
+    num_lote                    varchar(36) not null,
+    periodo_apuracao_reinf      bigint not null,
+    cnpj_empresa_raiz_reinf     bigint not null,
+    empresa_reinf               bigint,
+    attribute1                  bigint not null,
+    usuario_criacao             varchar(30) not null,
+    data_criacao                timestamp not null,
+    usuario_exclusao_lote       varchar(30),
+    data_exclusao_lote          timestamp,
+    usuario_retorno_receita     varchar(30),
+    data_retorno_receita        timestamp,    
+    numero_recibo               varchar(50),   
+    data_ult_alteracao          timestamp without time zone default now() not null,
+    usuario_ult_alteracao       varchar(30) default 'anonimo' not null,
+    versao                      integer not null default 0,
+    sit_historico_plc           varchar(1) default 'A' not null,  
+    primary key (id_reinf_lotes_efd_receita)
+);
 
 
 alter table reinf.tb_informacoes_contribuinte 
@@ -241,6 +262,18 @@ alter table reinf.tb_reinf_lotes
     add constraint FK_REINFLOTES_CNPJEMPRESARAIZREINF 
     foreign key (cnpj_empresa_raiz_reinf) 
     references bridge.tb_empresa_raiz_cnpj;
+ alter table reinf.tb_reinf_lotes 
+    add constraint FK_REINFLOTES_PERIODOAPURACAOREINF 
+    foreign key (periodo_apuracao_reinf) 
+    references reinf.tb_periodo_apuracao_reinf;    
+ alter table reinf.tb_reinf_lotes 
+    add constraint FK_REINFLOTES_TIPOAMBIENTE 
+    foreign key (tipo_ambiente) 
+    references bridge.tb_tipo_ambiente;
+ alter table reinf.tb_reinf_lotes_eventos 
+    add constraint FK_REINFLOTESEVENTOS_REINFLOTES 
+    foreign key (reinf_lotes) 
+    references reinf.tb_reinf_lotes;    
  alter table reinf.tb_reinf_lotes_eventos_retorno 
     add constraint FK_REINFLOTESEVENTOSRETORNO_REINFLOTESEVENTOS 
     foreign key (reinf_lotes_eventos) 
@@ -276,7 +309,7 @@ alter table reinf.tb_servicos_tomados
  alter table reinf.tb_servicos_tomados_proc_ret_pr 
     add constraint FK_SERVICOSTOMADOSPROCRETPR_SERVICOSTOMADOS 
     foreign key (servicos_tomados) 
-    references reinf.tb_servicos_tomados;    
+    references reinf.tb_servicos_tomados;     
 
 
  create sequence REINF.SE_CLASSIFICACAO_TRIBUTARIA;
@@ -290,6 +323,7 @@ alter table reinf.tb_servicos_tomados
  create sequence REINF.SE_SERVICOS_TOMADOS_NFS;
  create sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_AD;
  create sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_PR;
+ create sequence REINF.SE_REINF_LOTES_EFD_RECEITA;
  create sequence hibernate_sequence;
  
  
@@ -525,4 +559,4 @@ insert into reinf.tb_reinf_mensagens (id_reinf_mensagens, codigo_mensagem, descr
 insert into reinf.tb_reinf_mensagens (id_reinf_mensagens, codigo_mensagem, descricao_mensagem) values (nextval('reinf.se_reinf_mensagens'), 'MS2004', 'O valor informado deve existir na Tabela de Municípios do IBGE.');
 insert into reinf.tb_reinf_mensagens (id_reinf_mensagens, codigo_mensagem, descricao_mensagem) values (nextval('reinf.se_reinf_mensagens'), 'MS2005', 'O valor informado deve existir na Tabela de Código de Atividades, Produtos e Serviços');
 commit;
- 
+

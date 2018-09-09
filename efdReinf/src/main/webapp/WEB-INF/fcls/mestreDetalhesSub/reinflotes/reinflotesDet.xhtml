@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:plc="http://www.powerlogic.com.br/plc" 
+	xmlns:plct="http://www.powerlogic.com.br/plct" 
+	xmlns:plcf="http://www.powerlogic.com.br/plcf" 
+	xmlns:tr="http://myfaces.apache.org/trinidad" 
+	xmlns:trh="http://myfaces.apache.org/trinidad/html">  
+	<ui:composition> 
+		<fieldset class="plc-fieldset"> 
+			<legend class="plc-fieldset-legend">#{msg['reinflotes.titulo.detalhe']}</legend>  
+			<plcf:iteracao var="reinfLotesEventos" id="reinfLotesEventos" value="#{reinflotes.reinfLotesEventos}" columnClasses="celulaFormulario" headerClass="celulaFormulario"> 
+				<h:column> 
+					<h:outputText value="#{rowCounter.index}."/> 
+				</h:column>  
+				<h:column rendered="#{empty requestScope.visualizaDocumentoPlc}"> 
+					<f:facet name="header">
+						<plcf:tituloExclusao>Exc.</plcf:tituloExclusao>
+					</f:facet>  
+					<span class="celulaFormularioCaixaMarcacao">
+						<plcf:caixaExclusao id="indExcPlc" value="#{reinfLotesEventos.indExcPlc}"/>
+					</span> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.id']}"/>
+					</f:facet>  
+					<plcf:oid id="id" value="#{reinfLotesEventos.id}" ajudaChave="ajuda.id"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.nomeEvento']}"/>
+					</f:facet>  
+					<plcf:texto id="nomeEvento" value="#{reinfLotesEventos.nomeEvento}" ajudaChave="ajuda.nomeEvento" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.codigoEvento']}"/>
+					</f:facet>  
+					<plcf:texto id="codigoEvento" value="#{reinfLotesEventos.codigoEvento}" ajudaChave="ajuda.codigoEvento" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.seqEvento']}"/>
+					</f:facet>  
+					<plcf:texto id="seqEvento" value="#{reinfLotesEventos.seqEvento}" ajudaChave="ajuda.seqEvento" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.loteEvento']}"/>
+					</f:facet>  
+					<plcf:texto id="loteEvento" value="#{reinfLotesEventos.loteEvento}" ajudaChave="ajuda.loteEvento" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.dhProcess']}"/>
+					</f:facet>  
+					<plcf:texto id="dhProcess" value="#{reinfLotesEventos.dhProcess}" ajudaChave="ajuda.dhProcess" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.statusReinfEvento']}"/>
+					</f:facet>  
+					<plcf:comboEstatico id="statusReinfEvento" value="#{reinfLotesEventos.statusReinfEvento}" dominio="StatusLoteReinf" exibeBranco="S" ajudaChave="ajuda.statusReinfEvento" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.statusRetorno']}"/>
+					</f:facet>  
+					<plcf:texto id="statusRetorno" value="#{reinfLotesEventos.statusRetorno}" ajudaChave="ajuda.statusRetorno" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.numProtocolo']}"/>
+					</f:facet>  
+					<plcf:texto id="numProtocolo" value="#{reinfLotesEventos.numProtocolo}" ajudaChave="ajuda.numProtocolo" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.nomeArquivo']}"/>
+					</f:facet>  
+					<plcf:texto id="nomeArquivo" value="#{reinfLotesEventos.nomeArquivo}" ajudaChave="ajuda.nomeArquivo" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<plcf:titulo value="#{msg['label.idServicosTomados']}"/>
+					</f:facet>  
+					<plcf:texto id="idServicosTomados" value="#{reinfLotesEventos.idServicosTomados}" ajudaChave="ajuda.idServicosTomados" showRequired="true"/> 
+				</h:column>  
+				<h:column> 
+					<f:facet name="header">
+						<span class="plc-title af_outputLabel"/>
+					</f:facet>  
+					<plct:subDetalhe caminho="/WEB-INF/fcls/mestreDetalhesSub/reinflotes/reinflotesSubDet.xhtml"/> 
+				</h:column> 
+			</plcf:iteracao> 
+		</fieldset> 
+	</ui:composition> 
+</html>

@@ -11,11 +11,17 @@
 		<ui:composition>
 			<div id='plc-corpo-acao-personalisado' class='plc-corpo-acao-generico'>
 				<ui:insert name="plc-acao-criarPeriodo">
-					<plcf:botaoAcao id="botaoAcaogerarReinf" acao="criarPeriodo"
+					<plcf:botaoAcao id="botaoAcaocriarPeriodo" acao="criarPeriodo"
 						limpaForm="true" label="jcompany.evt.criarPeriodo"
 						botaoArrayID="criarPeriodo" validaForm="false" immediate="false"
 						rendered="#{requestScope.criarPeriodo=='S'}" />
-				</ui:insert>		
+				</ui:insert>
+				<ui:insert name="plc-acao-gerarReinf">
+					<plcf:botaoAcao id="botaoAcaogerarReinf" acao="gerarReinf"
+						limpaForm="true" label="jcompany.evt.gerarReinf"
+						botaoArrayID="gerarReinf" validaForm="false" immediate="false"
+						rendered="#{requestScope.gerarReinf=='S'}" />
+				</ui:insert>
 			
 			
 			</div>			 
