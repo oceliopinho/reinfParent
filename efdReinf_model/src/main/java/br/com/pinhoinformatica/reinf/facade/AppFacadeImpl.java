@@ -10,6 +10,7 @@ import com.powerlogic.jcompany.commons.config.stereotypes.SPlcFacade;
 import com.powerlogic.jcompany.facade.PlcFacadeImpl;
 
 import br.com.pinhoinformatica.bridge.model.utils.UtilsBridge;
+import br.com.pinhoinformatica.reinf.model.repository.GerarLoteReinfRepository;
 import br.com.pinhoinformatica.reinf.model.repository.PeriodoApuracaoReinfRepository;
 
 @QPlcDefault
@@ -18,6 +19,7 @@ public class AppFacadeImpl extends PlcFacadeImpl implements IAppFacade {
 	
 	@Inject private UtilsBridge utilsBridge;
 	@Inject private PeriodoApuracaoReinfRepository periodoApuracaoReinfRepository;
+	@Inject private GerarLoteReinfRepository gerarLoteReinfRepository;
 	
 	public Integer removerArquivos(File f) throws IOException {
 		return utilsBridge.removerArquivos(f);
@@ -33,5 +35,9 @@ public class AppFacadeImpl extends PlcFacadeImpl implements IAppFacade {
 	
 	public void enviarEmailException(String subject, String bodyMail, Boolean emailAttachment) {
 		
+	}
+	
+	public String enviaLoteEventoReInfSefaz(IAppFacade facade, String nomeServidor, String email) {
+		return gerarLoteReinfRepository.gerarDadosEnvio(facade, nomeServidor, email);
 	}
 }

@@ -5,6 +5,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
@@ -29,6 +30,7 @@ public abstract class EmpresaContatoReinf extends AppBaseEntity {
 	
 	@ManyToOne (targetEntity = EmpresaReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_EMPRESACONTATOREINF_EMPRESAREINF")
+	@JoinColumn(name="ID_EMPRESA")
 	@NotNull
 	private EmpresaReinf empresaReinf;
 

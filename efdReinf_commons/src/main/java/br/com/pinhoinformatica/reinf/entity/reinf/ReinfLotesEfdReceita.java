@@ -22,6 +22,8 @@ import javax.persistence.FetchType;
 import javax.validation.constraints.Digits;
 import com.powerlogic.jcompany.config.domain.PlcReference;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
 import com.powerlogic.jcompany.domain.validation.PlcValRequiredIf;
 import javax.persistence.Transient;
 
@@ -58,6 +60,7 @@ public abstract class ReinfLotesEfdReceita extends AppBaseEntity {
 	@ManyToOne (targetEntity = EmpresaReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_REINFLOTESEFDRECEITA_EMPRESAREINF")
 	@PlcValRequiredIf(dependentfield="empresaReinf",targetField="numLote")
+	@JoinColumn(name="ID_EMPRESA")
 	private EmpresaReinf empresaReinf;
 	
 	@ManyToOne (targetEntity = PeriodoApuracaoReinfEntity.class, fetch = FetchType.LAZY)

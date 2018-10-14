@@ -20,6 +20,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Enumerated;
 import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbienteEntity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 
 
 
@@ -50,6 +51,7 @@ public abstract class InformacoesContribuinte extends AppBaseEntity {
 	
 	@ManyToOne (targetEntity = CnpjEmpresaRaizReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_INFORMACOESCONTRIBUINTE_EMPRESARAIZCNPJ")
+	@JoinColumn(name="ID_EMPRESA_RAIZ_CNPJ")
 	@NotNull
 	private CnpjEmpresaRaizReinf empresaRaizCnpj;
 	
@@ -89,6 +91,7 @@ public abstract class InformacoesContribuinte extends AppBaseEntity {
 	
 	@ManyToOne (targetEntity = EmpresaReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_SERVICOSTOMADOS_EMPRESA")
+	@JoinColumn(name="ID_EMPRESA")
 	@NotNull
 	private EmpresaReinf empresaContatoReinf;	
 	

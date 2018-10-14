@@ -78,7 +78,7 @@ public class QuartzApplicationStartup implements ServletContextListener {
 	    			sql1 += "        q.qt_nome_classe  ";
 	    			sql1 += " From bridge.tb_quartz_cron_aplicacao q ";
 	    			sql1 += " Where sit_historico_plc = 'A' ";
-	    		    sql1 += " and qt_aplicacao = 'efdReinf' ";
+	    		    sql1 += " and aplicacao =  5 ";
 
 			pstmt = conn.prepareStatement(sql1);
 			rs = pstmt.executeQuery();

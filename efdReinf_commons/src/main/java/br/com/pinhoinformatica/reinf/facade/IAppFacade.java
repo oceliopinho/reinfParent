@@ -14,5 +14,7 @@ public interface IAppFacade extends IPlcFacade {
 	String gerarPeriodoReinf(IAppFacade facade, String login, Long idPeriodo);
 
 	void enviarEmailException(String subject, String bodyMail, Boolean emailAttachment);
+
+	String enviaLoteEventoReInfSefaz(IAppFacade facade, String nomeServidor, String email);
 	
 }

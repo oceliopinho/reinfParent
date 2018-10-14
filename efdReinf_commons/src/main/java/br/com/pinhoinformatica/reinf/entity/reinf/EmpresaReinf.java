@@ -32,6 +32,8 @@ import br.com.pinhoinformatica.reinf.entity.tabelas.CidadesReinfEntity;
 import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbienteEntity;
 import br.com.pinhoinformatica.reinf.entity.tabelas.EstadosReinfEntity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
 import java.util.List;
 import javax.validation.Valid;
 import javax.persistence.CascadeType;
@@ -48,6 +50,7 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	@ForeignKey(name="FK_EMPRESACONTATOREINF_EMPRESAREINF")
 	@PlcValDuplicity(property="cpfContato")
 	@PlcValMultiplicity(referenceProperty="cpfContato",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaContatoReinfEntity}")
+	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaContatoReinf> empresaContatoReinf;
 
@@ -57,6 +60,7 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	@ForeignKey(name="FK_EMPRESASMTPREINF_EMPRESAREINF")
 	@PlcValDuplicity(property="smtpServer")
 	@PlcValMultiplicity(referenceProperty="smtpServer",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaSmtpReinfEntity}")
+	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaSmtpReinf> empresaSmtpReinf;
 
@@ -66,6 +70,7 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	@ForeignKey(name="FK_EMPRESAPROXYREINF_TBEMPRESA")
 	@PlcValDuplicity(property="proxyServer")
 	@PlcValMultiplicity(referenceProperty="proxyServer",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaProxyReinfEntity}")
+	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaProxyReinf> empresaProxyReinf;
 
@@ -75,6 +80,7 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	@ForeignKey(name="FK_EMPRESAPOPREINF_TBEMPRESA")
 	@PlcValDuplicity(property="popServer")
 	@PlcValMultiplicity(referenceProperty="popServer",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaPopReinfEntity}")
+	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaPopReinf> empresaPopReinf;
 
@@ -82,12 +88,14 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	
 	@Id 
  	@GeneratedValue(strategy=GenerationType.AUTO, generator = "SE_EMPRESA")
+	@Column(name="ID_EMPRESA")
 	private Long id;
 
 	
 
 	@ManyToOne (targetEntity = CnpjEmpresaRaizReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_EMPRESAREINF_EMPRESARAIZCNPJ")
+	@JoinColumn(name="ID_EMPRESA_RAIZ_CNPJ")
 	@NotNull
 	private CnpjEmpresaRaizReinf empresaRaizCnpj;
 	
@@ -204,10 +212,8 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	
 	@NotNull
 	@Digits(integer=5, fraction=2)
-	private BigDecimal aliqIcms;
-	
-	@Size(max = 20)
-	private String verProcReinf;	
+	private BigDecimal aliqIcms;	
+
 	public Long getId() {
 		return id;
 	}
@@ -446,15 +452,7 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 
 	public void setAliqIcms(BigDecimal aliqIcms) {
 		this.aliqIcms=aliqIcms;
-	}
-
-	public String getVerProcReinf() {
-		return verProcReinf;
-	}
-
-	public void setVerProcReinf(String verProcReinf) {
-		this.verProcReinf=verProcReinf;
-	}
+	}	
 
 	public List<EmpresaPopReinf> getEmpresaPopReinf() {
 		return empresaPopReinf;

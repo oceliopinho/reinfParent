@@ -177,12 +177,12 @@
   <listener>
   <listener-class>org.quartz.ee.servlet.QuartzInitializerListener</listener-class>
  </listener>
-<!--   
+ 
  <listener>
-  <display-name>Quartz Scheduler Aplicação - P A R A  U S A R  Q U A R T Z  H A B I L I T E  E S T E  L I S T E N E R</display-name>
+  <display-name>Quartz Scheduler Aplicacao</display-name>
   <listener-class>br.com.pinhoinformatica.reinf.controller.quartz.QuartzApplicationStartup</listener-class>
  </listener>
- -->
+ 
  <!-- 
  <servlet>
   <servlet-name>Resteasy</servlet-name>

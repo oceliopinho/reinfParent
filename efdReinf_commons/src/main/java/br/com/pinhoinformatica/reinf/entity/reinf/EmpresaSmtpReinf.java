@@ -11,6 +11,8 @@ import javax.validation.constraints.Digits;
 import javax.persistence.FetchType;
 import javax.validation.constraints.NotNull;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+
 import com.powerlogic.jcompany.domain.validation.PlcValRequiredIf;
 import javax.persistence.Transient;
 
@@ -25,6 +27,7 @@ public abstract class EmpresaSmtpReinf extends AppBaseEntity {
 	
 	@ManyToOne (targetEntity = EmpresaReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_EMPRESASMTPREINF_EMPRESAREINF")
+	@JoinColumn(name="ID_EMPRESA")
 	@NotNull
 	private EmpresaReinf empresaReinf;
 

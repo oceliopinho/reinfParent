@@ -81,7 +81,7 @@ public class ReinfLotesDAO extends AppJpaDAO  {
 		ResultSet rs = null;
 		String query ="";
 
-		query = " Select l.id_reinf_lotes From tb_reinf_lotes l where l.num_lote = '" + numLote + "' and cnpj_prestador = '" + cnpjPrestador + "' and periodo_apuracao = '" + periodoApuracao + "' " ;
+		query = " Select l.id_reinf_lotes From reinf.tb_reinf_lotes l where l.num_lote = '" + numLote + "' and cnpj_prestador = '" + cnpjPrestador + "' and periodo_apuracao = '" + periodoApuracao + "' " ;
 		pstmt = conn.prepareStatement(query);
 
 		rs = pstmt.executeQuery();
@@ -90,7 +90,7 @@ public class ReinfLotesDAO extends AppJpaDAO  {
 		}
 
 		if (ret == 0) {
-			query = " Select SE_REINF_LOTES.nextval as num from dual " ;
+			query = " Select reinf.SE_REINF_LOTES.nextval as num from dual " ;
 			pstmt = conn.prepareStatement(query);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -130,7 +130,7 @@ public class ReinfLotesDAO extends AppJpaDAO  {
 		ResultSet rs = null;
 		Long ret = (long) 0;
 		try {
-			String 	sql1 = " select l.id_reinf_lotes From tb_reinf_lotes l where l.num_lote = '" + numLote + "' and cnpj_prestador = '" + cnpjPrestador + "' and periodo_apuracao = '" + strPerApur + "' "; 
+			String 	sql1 = " select l.id_reinf_lotes From reinf.reinf.tb_reinf_lotes l where l.num_lote = '" + numLote + "' and cnpj_prestador = '" + cnpjPrestador + "' and periodo_apuracao = '" + strPerApur + "' "; 
 			pstmt = conn.prepareStatement(sql1);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -255,7 +255,7 @@ public class ReinfLotesDAO extends AppJpaDAO  {
 		String sqlErro = null;
 		try {
 			conn.setAutoCommit(false);
-			String sqlInsert = " Update tb_reinf_lotes Set status_reinf = '" + statusReinf + "', data_ult_alteracao = sysdate, versao = versao+1 Where id_reinf_lotes = " + idReinf + " ";
+			String sqlInsert = " Update reinf.tb_reinf_lotes Set status_reinf = '" + statusReinf + "', data_ult_alteracao = sysdate, versao = versao+1 Where id_reinf_lotes = " + idReinf + " ";
 			pstmt = conn.prepareStatement(sqlInsert);
 			sqlErro = sqlInsert;
 
@@ -389,7 +389,7 @@ public class ReinfLotesDAO extends AppJpaDAO  {
 		String sqlErro = null;
 		try {
 			conn.setAutoCommit(false);
-			String sqlInsert = " insert into tb_reinf_lotes(id_reinf_lotes, cnpj_raiz, data_geracao, num_lote, status_reinf, cnpj_prestador, periodo_apuracao) values (" + idReinf + ", '" + cnpjRaiz + "', sysdate, '" + numLote + "', '" + statusReinf + "', '" + cnpjPrestador + "', '" + strPerApur + "') ";
+			String sqlInsert = " insert into reinf.tb_reinf_lotes(id_reinf_lotes, cnpj_raiz, data_geracao, num_lote, status_reinf, cnpj_prestador, periodo_apuracao) values (" + idReinf + ", '" + cnpjRaiz + "', sysdate, '" + numLote + "', '" + statusReinf + "', '" + cnpjPrestador + "', '" + strPerApur + "') ";
 			pstmt = conn.prepareStatement(sqlInsert);
 			sqlErro = sqlInsert;
 
@@ -494,7 +494,7 @@ public class ReinfLotesDAO extends AppJpaDAO  {
 		Long cod = null;		
 		PreparedStatement pstmt = null;
 
-		String query = "insert into tb_reinf_lotes_reinf_arquivo(tb_reinf_lotes, reinf_arquivo) values (?, ?) " ;
+		String query = "insert into reinf.tb_reinf_lotes_reinf_arquivo(reinf.tb_reinf_lotes, reinf_arquivo) values (?, ?) " ;
 		pstmt = conn.prepareStatement(query);
 		pstmt.setLong(1, idReinf);
 		pstmt.setLong(2, idArquivo);
@@ -502,4 +502,360 @@ public class ReinfLotesDAO extends AppJpaDAO  {
 		pstmt.close();			
 		pstmt.close();
 	}
+	
+	public String confGerarRegistro(Connection conn, Long idCnpjRaiz, Long idPeriodoApuracao, String registro) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String ret = "N";
+		try {
+			String 	sql1 = " Select rler.evento "; 
+			sql1        += " From reinf.tb_reinf_lotes_efd_receita rler "; 
+			sql1        += " Where rler.cnpj_empresa_raiz_reinf = " + idCnpjRaiz + " "; 
+			sql1        += " and   rler.periodo_apuracao_reinf = " + idPeriodoApuracao + " "; 
+			sql1        += " and   rler.evento = '" + registro + "' ";
+			sql1        += " and   rler.status_lote_reinf in('EWS') "; 
+			pstmt = conn.prepareStatement(sql1);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ret = "S";				
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ret;
+	}
+	
+	public String updateReinfEventosErros(Connection conn, IAppFacade facade, Long idReinf, String numProtocolo, String statusReinf, String descRetorno) throws Exception {		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlErro = null;
+		try {
+			conn.setAutoCommit(false);
+			String sqlInsert = " update reinf.tb_reinf_eventos re Set re.status_reinf_evento = '" + statusReinf + "', re.status_retorno = '" + descRetorno + "', re.num_protocolo = '" + numProtocolo + "' Where re.reinf_lotes = " + idReinf + " ";
+			pstmt = conn.prepareStatement(sqlInsert);
+			sqlErro = sqlInsert;
+			
+			pstmt.executeUpdate(sqlInsert); 				
+		} catch (Exception e) {
+			String subject = "Erro updateReinfEventosRetornoErros";
+			String bodyMail = sqlErro + " - " + e.getMessage();
+			Boolean emailAttachment = false;			
+			facade.enviarEmailException(subject, bodyMail, emailAttachment);
+		} finally {
+			if (!sqlErro.contains("Erro Sql : ")) {
+				sqlErro = null;
+			}
+			try {				
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sqlErro;
+	}
+	
+	public String updateLotesControladoriaErroRetorno(Connection conn, IAppFacade facade, String statusEfd, String numProtocolo, Long idCnpjRaiz, Long idPeriodoApuracao, Long idReinf) throws Exception {		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlErro = null;
+		String sqlInsert = "";
+		try {
+			conn.setAutoCommit(false);
+			sqlInsert = " Update controladoria.tb_lote_eventos_efd_reinf leer ";
+			sqlInsert       += " Set leer.data_retorno_receita = to_date(sysdate,'dd/MM/yyyy hh24:mi:ss'), ";
+			sqlInsert       += "     leer.usuario_retorno_receita = 'tbmWebServices', ";
+			sqlInsert       += "     leer.status = '" + statusEfd + "',  ";
+			sqlInsert       += "     leer.numero_recibo = '" + numProtocolo + "' ";
+			sqlInsert       += " Where leer.id_cnpj_raiz_oracle = " + idCnpjRaiz + " ";
+			sqlInsert       += " and   leer.id_periodo_apuracao_efd_reinf = " + idPeriodoApuracao + " ";
+			sqlInsert       += " and   leer.id_lote_eventos_efd_reinf in(Select re.id_eventos_controladoria From tb_reinf_eventos re Where re.reinf_lotes = " + idReinf + " and id_eventos_controladoria > 0) ";
+
+			pstmt = conn.prepareStatement(sqlInsert);
+			sqlErro = sqlInsert;
+			
+			pstmt.executeUpdate(sqlInsert); 				
+		} catch (Exception e) {
+			String subject = "Erro updateLotesControladoriaErroRetorno";
+			String bodyMail = sqlErro + " - " + e.getMessage();
+			Boolean emailAttachment = false;	
+			facade.enviarEmailException(subject, bodyMail, emailAttachment);
+		} finally {
+			if (!sqlErro.contains("Erro Sql : ")) {
+				sqlErro = null;
+			}
+			try {				
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sqlErro;
+	}
+	
+	
+	public Long selecionaIdLoteEfd(Connection conn, String numLote) throws SQLException {
+		Long cod = (long) 0;		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql1 = " Select re.id_eventos_controladoria seq ";
+		sql1       += " From reinf.tb_reinf_eventos re ";
+		sql1       += " Where re.lote_evento = '" + numLote + "' ";
+		pstmt = conn.prepareStatement(sql1);
+		rs = pstmt.executeQuery();
+		pstmt = conn.prepareStatement(sql1);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			cod = rs.getLong("seq");				
+		}
+		pstmt.close();
+		return cod;
+	}	
+	
+	public Long retornaIdMensagem(Connection conn, String codResp) throws SQLException {
+		Long ret = (long) 0;		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String query ="";
+
+		query = " Select m.id_reinf_mensagens From tb_reinf_mensagens m Where m.codigo_mensagem = '" + codResp + "' " ;
+		pstmt = conn.prepareStatement(query);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			ret = rs.getLong("id_reinf_mensagens");				
+		}			
+		pstmt.close();
+		rs.close();
+		return ret;
+	}	
+	
+	public Long confReinfEventoRetorno(Connection conn, Long idReinf, String numLote) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Long ret = (long) 0;
+		try {
+			String 	sql1 = " Select re.id_reinf_eventos "; 
+			sql1        += " From reinf.tb_reinf_eventos re "; 
+			sql1        += " Where re.reinf_lotes = " + idReinf + " "; 
+			sql1        += " and   re.lote_evento = '" + numLote + "' "; 
+			pstmt = conn.prepareStatement(sql1);
+			System.out.println("confReinfEventoRetorno" + sql1);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				ret = rs.getLong("id_reinf_eventos");				
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return ret;
+	}
+	
+	public String updateReinfEventosReceita(Connection conn, IAppFacade facade, String statusReinf, String tpEv, String idEv, String dhProcess, String descRetorno, String numProtocolo) throws Exception {		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlErro = null;
+		try {
+			conn.setAutoCommit(false);
+			String sqlInsert = " update reinf.tb_reinf_eventos re Set tp_ev = '" + tpEv + "', dh_process = '" + dhProcess + "', re.status_retorno = '" + descRetorno + "', re.num_protocolo = '" + numProtocolo + "', re.status_reinf_evento = '" + statusReinf + "' Where lote_evento = '" + idEv + "' and nome_evento <> 'Reinf' ";
+			pstmt = conn.prepareStatement(sqlInsert);
+			sqlErro = sqlInsert;
+			
+			pstmt.executeUpdate(sqlInsert); 				
+		} catch (Exception e) {
+			String subject = "Erro updateReinfEventosReceita";
+			String bodyMail = sqlErro + " - " + e.getMessage();
+			Boolean emailAttachment = false;			
+			facade.enviarEmailException(subject, bodyMail, emailAttachment);
+		} finally {
+			if (!sqlErro.contains("Erro Sql : ")) {
+				sqlErro = null;
+			}
+			try {				
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sqlErro;
+	}
+	
+	public String updateReinfEventosRetornoReceita(Connection conn, IAppFacade facade, Long confEventoRetorno, Long idMensagem, String localErroAviso) throws Exception {		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlErro = null;
+		try {
+			conn.setAutoCommit(false);
+			String sqlInsert = " update reinf.tb_reinf_eventos_retorno set reinf_lotes_mensagens = " + idMensagem + ", localizacao_erro_aviso = '" + localErroAviso + "' Where reinf_eventos = " + confEventoRetorno + " ";
+			pstmt = conn.prepareStatement(sqlInsert);
+			sqlErro = sqlInsert;
+			
+			pstmt.executeUpdate(sqlInsert); 				
+		} catch (Exception e) {
+			String subject = "Erro updateReinfEventosRetornoReceita";
+			String bodyMail = sqlErro + " - " + e.getMessage();
+			Boolean emailAttachment = false;			
+			facade.enviarEmailException(subject, bodyMail, emailAttachment);
+		} finally {
+			if (!sqlErro.contains("Erro Sql : ")) {
+				sqlErro = null;
+			}
+			try {				
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sqlErro;
+	}
+	
+	public String updateLotesControladoriaRetorno(Connection conn, IAppFacade facade, Long idEventoReinf, String numProtocolo, String statusEfd, String dhProcess, String idEv, Long idLoteEfd) throws Exception {		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlErro = null;
+		String sqlInsert = "";
+		try {
+			conn.setAutoCommit(false);
+			if (dhProcess == null) {
+				sqlInsert = " update controladoria.tb_lote_eventos_efd_reinf leer Set leer.data_retorno_receita = sysdate, leer.usuario_retorno_receita = 'tbmWebServices', leer.status = '" + statusEfd + "', leer.numero_recibo = '" + numProtocolo + "', leer.id_reinf_eventos_ws_tbm = " + idEventoReinf + " Where leer.id_lote_eventos_efd_reinf = " + idLoteEfd + " ";
+			} else {
+				sqlInsert = " update controladoria.tb_lote_eventos_efd_reinf leer Set leer.data_retorno_receita = to_date('" + dhProcess + "','dd/MM/yyyy hh24:mi:ss'), leer.usuario_retorno_receita = 'tbmWebServices', leer.status = '" + statusEfd + "', leer.numero_recibo = '" + numProtocolo + "', leer.id_reinf_eventos_ws_tbm = " + idEventoReinf + " Where leer.id_lote_eventos_efd_reinf = " + idLoteEfd + " ";
+			}
+
+			pstmt = conn.prepareStatement(sqlInsert);
+			
+			sqlErro = sqlInsert;
+			
+			pstmt.executeUpdate(sqlInsert); 				
+		} catch (Exception e) {
+			String subject = "Erro updateLotesControladoriaRetorno ";
+			String bodyMail = sqlErro + " - " + e.getMessage();
+			Boolean emailAttachment = false;	
+			System.out.println(bodyMail);
+			facade.enviarEmailException(subject, bodyMail, emailAttachment);
+		} finally {
+			if (!sqlErro.contains("Erro Sql : ")) {
+				sqlErro = null;
+			}
+			try {				
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sqlErro;
+	}
+	
+	public String updatePeriodoControladoria(Connection conn, IAppFacade facade, Long idPeriodoApuracao) throws Exception {		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlErro = null;
+		try {
+			conn.setAutoCommit(false);
+			String sqlInsert = " update controladoria.tb_periodo_apuracao_efd_reinf paer set paer.status = 'Fechado' Where paer.id_periodo_apuracao_efd_reinf = " + idPeriodoApuracao + " ";
+			pstmt = conn.prepareStatement(sqlInsert);
+			sqlErro = sqlInsert;
+			
+			pstmt.executeUpdate(sqlInsert); 				
+		} catch (Exception e) {
+			String subject = "Erro updatePeriodoControladoria ";
+			String bodyMail = sqlErro + " - " + e.getMessage();
+			Boolean emailAttachment = false;			
+			facade.enviarEmailException(subject, bodyMail, emailAttachment);
+		} finally {
+			if (!sqlErro.contains("Erro Sql : ")) {
+				sqlErro = null;
+			}
+			try {				
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sqlErro;
+	}
+	
+	public Long selecionaIdServicosTomados(Connection conn, String numLote) throws SQLException {
+		Long cod = (long) 0;		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		String sql1 = " Select re.id_tomador_servico seq ";
+		sql1       += " From tb_reinf_eventos re ";
+		sql1       += " Where re.lote_evento = '" + numLote + "' ";
+		pstmt = conn.prepareStatement(sql1);
+		rs = pstmt.executeQuery();
+		pstmt = conn.prepareStatement(sql1);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			cod = rs.getLong("seq");				
+		}
+		pstmt.close();
+		return cod;
+	}
+	
+	public String updateServicosTomadosReceita(Connection conn, IAppFacade facade, Long idServicosTomados, String statusEfd, String numProtocolo, String dhProcess, String vlrTotalBaseRet, String vlrCRTom) throws Exception {		
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sqlErro = null;
+		try {
+			conn.setAutoCommit(false);
+			String sqlInsert = " update controladoria.tb_r2010_servicos_tomados st set st.status_recibo_receita = '" + statusEfd + "',  st.nr_recibo = '" + numProtocolo + "', data_recibo_receita = to_date('" + dhProcess + "','dd/MM/yyyy hh24:mi:ss'), valor_base_retorno_receita = '" + vlrTotalBaseRet + "', valor_imposto_retorno_receita = '" + vlrCRTom + "' Where id_r2010_servicos_tomados = " + idServicosTomados + " ";
+			pstmt = conn.prepareStatement(sqlInsert);
+			sqlErro = sqlInsert;
+			
+			pstmt.executeUpdate(sqlInsert); 				
+		} catch (Exception e) {
+			String subject = "Erro updateServicosTomadosReceita";
+			String bodyMail = sqlErro + " - " + e.getMessage();
+			Boolean emailAttachment = false;			
+			facade.enviarEmailException(subject, bodyMail, emailAttachment);
+		} finally {
+			if (!sqlErro.contains("Erro Sql : ")) {
+				sqlErro = null;
+			}
+			try {				
+				pstmt.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return sqlErro;
+	}	
 }

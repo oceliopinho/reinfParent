@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -54,6 +55,7 @@ public abstract class ReinfLotes extends AppBaseEntity {
 	
 	@ManyToOne (targetEntity = CnpjEmpresaRaizReinfEntity.class, fetch = FetchType.LAZY)
 	@ForeignKey(name="FK_REINFLOTES_CNPJEMPRESARAIZREINF")
+	@JoinColumn(name="ID_EMPRESA_RAIZ_CNPJ")
 	@NotNull
 	private CnpjEmpresaRaizReinf cnpjEmpresaRaizReinf;
 	
