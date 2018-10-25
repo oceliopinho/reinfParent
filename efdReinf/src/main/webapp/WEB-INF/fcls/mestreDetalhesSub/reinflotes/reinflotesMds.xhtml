@@ -59,6 +59,10 @@
 					<plcf:numerico id="valorImpostoInss" value="#{reinflotes.valorImpostoInss}" ajudaChave="ajuda.valorImpostoInss" showRequired="true"/> 
 				</plcf:celula> 
 			</plcf:linha> 
+			<plcf:linha>		
+			   <plcf:titulo value="#{msg['label.reinfArquivo']}" />
+			   <plct:fileAttach property="reinfArquivo" />
+			</plcf:linha>		
 		</plcf:tabela> 
 	</ui:composition> 
 </html>

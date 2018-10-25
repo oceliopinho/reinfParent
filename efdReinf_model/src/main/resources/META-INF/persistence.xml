@@ -42,7 +42,7 @@
 	
 		<class>br.com.pinhoinformatica.reinf.entity.reinf.EmpresaSmtpReinfEntity</class>
 	
-		<class>br.com.pinhoinformatica.reinf.entity.reinf.EmpresaContatoReinfEntity</class>
+	 	<class>br.com.pinhoinformatica.reinf.entity.reinf.EmpresaContatoReinfEntity</class>  
 	
 		<class>br.com.pinhoinformatica.reinf.entity.reinf.PeriodoApuracaoReinfEntity</class>
 	
@@ -65,6 +65,10 @@
 		<class>br.com.pinhoinformatica.reinf.entity.reinf.ReinfLotesEventosRetornoEntity</class>
 	
 		<class>br.com.pinhoinformatica.reinf.entity.reinf.ReinfLotesEfdReceitaEntity</class>
+		
+		<class>br.com.pinhoinformatica.reinf.entity.reinf.ReinfArquivoEntity</class>
+		
+		<class>br.com.pinhoinformatica.reinf.entity.reinf.ReinfArquivoConteudoEntity</class>
 	<properties>			
 			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.show_sql" value="true"/>

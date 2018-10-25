@@ -31,18 +31,24 @@ ALTER DATABASE nfe SET search_path=nfe;
  drop table if exists reinf.tb_servicos_tomados_nfs cascade;
  drop table if exists reinf.tb_servicos_tomados_proc_ret_ad cascade;
  drop table if exists reinf.tb_servicos_tomados_proc_ret_pr cascade;
- drop sequence REINF.SE_CLASSIFICACAO_TRIBUTARIA;
- drop sequence REINF.SE_INFORMACOES_CONTRIBUINTE;
- drop sequence REINF.SE_PERIODO_APURACAO_REINF;
- drop sequence REINF.SE_REINF_LOTES;
- drop sequence REINF.SE_REINF_LOTES_EVENTOS;
- drop sequence REINF.SE_REINF_LOTES_EVENTOS_RETORNO;
- drop sequence REINF.SE_REINF_MENSAGENS;
- drop sequence REINF.SE_SERVICOS_TOMADOS;
- drop sequence REINF.SE_SERVICOS_TOMADOS_NFS;
- drop sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_AD;
- drop sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_PR;
- drop sequence hibernate_sequence;
+ drop table if exists reinf.tb_reinf_arquivo cascade; 
+ drop table if exists reinf.tb_reinf_arquivo_conteudo cascade; 
+ drop table if exists tb_reinf_lotes_reinf_arquivo cascade; 
+
+ drop sequence if exists REINF.SE_CLASSIFICACAO_TRIBUTARIA;
+ drop sequence if exists REINF.SE_INFORMACOES_CONTRIBUINTE;
+ drop sequence if exists REINF.SE_PERIODO_APURACAO_REINF;
+ drop sequence if exists REINF.SE_REINF_LOTES;
+ drop sequence if exists REINF.SE_REINF_LOTES_EVENTOS;
+ drop sequence if exists REINF.SE_REINF_LOTES_EVENTOS_RETORNO;
+ drop sequence if exists REINF.SE_REINF_MENSAGENS;
+ drop sequence if exists REINF.SE_SERVICOS_TOMADOS;
+ drop sequence if exists REINF.SE_SERVICOS_TOMADOS_NFS;
+ drop sequence if exists REINF.SE_SERVICOS_TOMADOS_PROC_RET_AD;
+ drop sequence if exists REINF.SE_SERVICOS_TOMADOS_PROC_RET_PR;
+ drop sequence if exists REINF.SE_REINF_ARQUIVO_CONTEUDO_PLC;
+ drop sequence if exists REINF.SE_REINF_ARQUIVO_PLC;
+ drop sequence if exists hibernate_sequence;
  
  create table reinf.tb_classificacao_tributaria (
     id_classificacao_tributaria bigint not null,
@@ -54,23 +60,25 @@ ALTER DATABASE nfe SET search_path=nfe;
     primary key (id_classificacao_tributaria)
 );
  create table reinf.tb_informacoes_contribuinte (
-    id_informacoes_contribuinte bigint not null,
-    tipo_cadastro_contribuinte  varchar(1) not null,
-    tipo_ambiente               bigint not null,
-    periodo_apuracao_reinf      bigint not null,
-    per_apur                    varchar(7) not null,
-    empresa_raiz_cnpj           bigint not null,
-    situacao_pessoa_juridica    varchar(5) not null,
-    tipo_inscricao              varchar(5) not null,
-    empresa_contato_reinf       bigint not null,
-    classificacao_tributaria    bigint not null,
-    ind_acordo_isen_multa       varchar(1) not null,
-    ind_desoneracao             varchar(1) not null,
-    ind_escrituracao            varchar(1) not null,    
-    data_ult_alteracao          timestamp without time zone default now() not null,
-    usuario_ult_alteracao       varchar(30) default 'anonimo' not null,
-    versao                      integer not null default 0,
-    sit_historico_plc           varchar(1) default 'A' not null,    
+    id_informacoes_contribuinte  bigint not null,
+    id_empresa_raiz_cnpj         bigint not null,
+    tipo_cadastro_contribuinte   varchar(1) not null,
+    tipo_ambiente                bigint not null,
+    periodo_apuracao_reinf       bigint not null,
+    per_apur                     varchar(7) not null,
+    empresa_raiz_cnpj            bigint not null,
+    situacao_pessoa_juridica     varchar(5) not null,
+    tipo_inscricao               varchar(5) not null,
+    empresa_contato_reinf        bigint not null,
+    classificacao_tributaria     bigint not null,
+    ind_acordo_isen_multa        varchar(1) not null,
+    ind_desoneracao               varchar(1) not null,
+    ind_escrituracao             varchar(1) not null,    
+    ind_situacao_pessoa_juridica varchar(6)
+    data_ult_alteracao           timestamp without time zone default now() not null,
+    usuario_ult_alteracao        varchar(30) default 'anonimo' not null,
+    versao                       integer not null default 0,
+    sit_historico_plc            varchar(1) default 'A' not null,    
     primary key (id_informacoes_contribuinte)
 );
  create table reinf.tb_periodo_apuracao_reinf (
@@ -86,7 +94,7 @@ ALTER DATABASE nfe SET search_path=nfe;
 );
 create table reinf.tb_reinf_lotes ( 
     id_reinf_lotes              bigint not null,
-    cnpj_empresa_raiz_reinf     bigint not null,
+    id_empresa_raiz_cnpj        bigint not null,
     periodo_apuracao_reinf      bigint not null,
     status_lote_reinf           varchar(5) not null,
     tipo_ambiente               bigint not null,
@@ -236,6 +244,26 @@ create table reinf.tb_reinf_mensagens (
     sit_historico_plc           varchar(1) default 'A' not null,  
     primary key (id_reinf_lotes_efd_receita)
 );
+create table reinf.tb_reinf_arquivo (
+    id bigint not null,
+    dat_seguranca timestamp,
+    tamanho integer,
+    nome varchar(255),
+    tipo varchar(255),
+    usu_seguranca varchar(255),
+    versao integer,
+    binary_content bigint,
+    primary key (id)
+);
+ create table reinf.tb_reinf_arquivo_conteudo (
+    id bigint not null,
+    conteudo_binario bytea,
+    primary key (id)
+);
+ create table tb_reinf_lotes_reinf_arquivo (
+    tb_reinf_lotes bigint not null,
+    reinf_arquivo bigint not null
+);
 
 
 alter table reinf.tb_informacoes_contribuinte 
@@ -324,6 +352,8 @@ alter table reinf.tb_servicos_tomados
  create sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_AD;
  create sequence REINF.SE_SERVICOS_TOMADOS_PROC_RET_PR;
  create sequence REINF.SE_REINF_LOTES_EFD_RECEITA;
+ create sequence REINF.SE_REINF_ARQUIVO_CONTEUDO_PLC;
+ create sequence REINF.SE_REINF_ARQUIVO_PLC; 
  create sequence hibernate_sequence;
  
  

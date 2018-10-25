@@ -2,7 +2,9 @@ package br.com.pinhoinformatica.reinf.entity.reinf;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -13,24 +15,25 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ForeignKey;
 
+import com.powerlogic.jcompany.config.domain.PlcFileAttach;
+import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
+import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
+
 import br.com.pinhoinformatica.reinf.entity.AppBaseEntity;
 import br.com.pinhoinformatica.reinf.entity.dominio.StatusLoteReinf;
 import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbiente;
 import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbienteEntity;
-import java.util.List;
-import javax.validation.Valid;
-import javax.persistence.CascadeType;
-import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
-import javax.persistence.OneToMany;
-import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
 
 
 @MappedSuperclass
@@ -93,6 +96,13 @@ public abstract class ReinfLotes extends AppBaseEntity {
 	@NotNull
 	@Digits(integer=13, fraction=2)
 	private BigDecimal valorImpostoInss;
+	
+	@SuppressWarnings("unchecked")
+	@OneToMany (targetEntity = ReinfArquivoEntity.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@OrderBy("id")
+	@ForeignKey(name="FK_REINFLOTE_REINFARQUIVO")
+	@PlcFileAttach(extension={"xml"},  multiple=true)
+	private List<ReinfArquivoEntity> reinfArquivo;
 	
 	public Long getId() {
 		return id;
@@ -182,4 +192,11 @@ public abstract class ReinfLotes extends AppBaseEntity {
 		this.reinfLotesEventos=reinfLotesEventos;
 	}
 
+	public List<ReinfArquivoEntity> getReinfArquivo() {
+		return reinfArquivo;
+	}
+
+	public void setReinfArquivo(List<ReinfArquivoEntity> reinfArquivo) {
+		this.reinfArquivo = reinfArquivo;
+	}
 }

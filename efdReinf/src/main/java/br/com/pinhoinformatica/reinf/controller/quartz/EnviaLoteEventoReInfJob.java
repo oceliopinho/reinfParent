@@ -27,7 +27,7 @@ public class EnviaLoteEventoReInfJob implements Job {
 				String login = "ocelio";
 				String email = "oceliopinho@gmail.com";
 				String ret = facade.enviaLoteEventoReInfSefaz(facade, nomeServidor, email);
-				log.info("Finalizou EnviaLoteEventoReInfJob");
+				log.info("Finalizou Lote");
 			} catch (Exception e) {			
 				e.printStackTrace();
 			} finally {

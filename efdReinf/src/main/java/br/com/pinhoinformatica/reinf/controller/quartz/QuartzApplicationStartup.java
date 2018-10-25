@@ -61,24 +61,34 @@ public class QuartzApplicationStartup implements ServletContextListener {
 		Map<String, JobTrigger> mapJobTrigger = new HashMap<String, JobTrigger>();		
 		ServletContext ctx = sce.getServletContext();
 		try {
-			nomeServidor = Inet4Address.getLocalHost().getCanonicalHostName();
-			
-			System.out.println(" S E R V I D O R - " + nomeServidor);
-			
-			log.info("------- Scheduling Jobs -------------------");			
 			conn = SqlConnectionJdbc.getConnection();
-			String 	sql1  = " Select q.sit_historico_plc, ";
-					sql1 += "        q.qt_nome_job, ";
-					sql1 += "        q.qt_cron_scheduler, ";
-					sql1 += "        q.qt_servidor, ";
-	                sql1 += "        q.qt_nome_classe, ";
-	    		    sql1 += "        rpad(q.qt_nome_job,30,' ') as nome, ";
-	    			sql1 += "        rpad(q.qt_cron_scheduler,30,' ') as cron, ";
-	    			sql1 += "        qt_nome_grupo, rpad(q.qt_servidor,30,' ') as servidor, ";
-	    			sql1 += "        q.qt_nome_classe  ";
-	    			sql1 += " From bridge.tb_quartz_cron_aplicacao q ";
-	    			sql1 += " Where sit_historico_plc = 'A' ";
-	    		    sql1 += " and aplicacao =  5 ";
+			conn.setAutoCommit(false);
+			nomeServidor = Inet4Address.getLocalHost().getCanonicalHostName();
+			String 	sql1  = " update bridge.tb_quartz_cron_aplicacao q set qt_servidor = '" + nomeServidor + "' Where qt_nome_job = 'Teste' ";
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.executeUpdate();
+			conn.commit();
+			pstmt.close();
+
+			System.out.println(" S E R V I D O R - " + nomeServidor);
+
+			log.info("------- Scheduling Jobs -------------------");			
+
+			sql1  = "";
+			sql1  = " Select q.sit_historico_plc, ";
+			sql1 += "        q.qt_nome_job, ";
+			sql1 += "        q.qt_cron_scheduler, ";
+			sql1 += "        q.qt_servidor, ";
+			sql1 += "        q.qt_nome_classe, ";
+			sql1 += "        rpad(q.qt_nome_job,30,' ') as nome, ";
+			sql1 += "        rpad(q.qt_cron_scheduler,30,' ') as cron, ";
+			sql1 += "        qt_nome_grupo, rpad(q.qt_servidor,30,' ') as servidor, ";
+			sql1 += "        q.qt_nome_classe  ";
+			sql1 += " From bridge.tb_quartz_cron_aplicacao q, ";
+			sql1 += "      bridge.tb_aplicacao a ";
+			sql1 += " Where q.sit_historico_plc = 'A' ";
+			sql1 += " and   a.id_aplicacao = q.aplicacao ";
+			sql1 += " and   a.nome_aplicacao = 'efdReinf' ";
 
 			pstmt = conn.prepareStatement(sql1);
 			rs = pstmt.executeQuery();

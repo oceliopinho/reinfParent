@@ -25,10 +25,9 @@ public class StartConfiguracoes {
 	private static Provider provider;
 	private static UtilsBridge utilsXml;
 
-	public static ConfiguracoesIniciaisNfe iniciaConfigurações(Integer tipoAmbiente, String modDoc, String siglaUf, String tipoCertificado, String nomeCertificado, String senhaCertificado, String modeloCertificado, String caminhoCertificado, String dirEmp, String pastaSchemas, String caminhoCacerts, String versaoXml, String versaoNfe, Integer tempoTimeOut, URL urlWebService) throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException, NfeException {
+	public static ConfiguracoesIniciaisNfe iniciaConfigurações(Integer tipoAmbiente, String modDoc, String siglaUf, String tipoCertificado, String nomeCertificado, String senhaCertificado, String modeloCertificado, String caminhoCertificado, String dirEmp, String pastaSchemas, String caminhoCacerts, String versaoXml, String versaoNfe, Integer tempoTimeOut, URL urlWebService, boolean ativaLog) throws KeyStoreException, NoSuchAlgorithmException, CertificateException, IOException, NfeException {
 		Certificado certificado = null;
 		String ambiente = null;
-		boolean ativaLog = true;		
 		Estados estado = Estados.valueOf(siglaUf);
 
 		String arqConfigA3 = null;

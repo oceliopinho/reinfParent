@@ -2,55 +2,56 @@ package br.com.pinhoinformatica.reinf.entity.reinf;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.ForeignKey;
+
+import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
+import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
 
 import br.com.pinhoinformatica.reinf.entity.AppBaseEntity;
 import br.com.pinhoinformatica.reinf.entity.dominio.TipoCertificado;
 import br.com.pinhoinformatica.reinf.entity.tabelas.CidadesReinf;
-import br.com.pinhoinformatica.reinf.entity.tabelas.EstadosReinf;
-import br.com.pinhoinformatica.reinf.entity.tabelas.ModeloDocReinf;
-import br.com.pinhoinformatica.reinf.entity.tabelas.PaisesReinf;
-import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbiente;
-import br.com.pinhoinformatica.reinf.entity.tabelas.TipoEmpresa;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.Size;
-import javax.persistence.MappedSuperclass;
-import org.hibernate.annotations.ForeignKey;
-import javax.persistence.TemporalType;
-import br.com.pinhoinformatica.reinf.entity.tabelas.PaisesReinfEntity;
-import br.com.pinhoinformatica.reinf.entity.tabelas.TipoEmpresaEntity;
-import javax.validation.constraints.NotNull;
-import br.com.pinhoinformatica.reinf.entity.tabelas.ModeloDocReinfEntity;
-import javax.persistence.EnumType;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Temporal;
-import javax.persistence.FetchType;
-import javax.validation.constraints.Digits;
-import javax.persistence.Enumerated;
 import br.com.pinhoinformatica.reinf.entity.tabelas.CidadesReinfEntity;
-import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbienteEntity;
+import br.com.pinhoinformatica.reinf.entity.tabelas.EstadosReinf;
 import br.com.pinhoinformatica.reinf.entity.tabelas.EstadosReinfEntity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-
-import java.util.List;
-import javax.validation.Valid;
-import javax.persistence.CascadeType;
-import com.powerlogic.jcompany.domain.validation.PlcValMultiplicity;
-import javax.persistence.OneToMany;
-import com.powerlogic.jcompany.domain.validation.PlcValDuplicity;
+import br.com.pinhoinformatica.reinf.entity.tabelas.ModeloDocReinf;
+import br.com.pinhoinformatica.reinf.entity.tabelas.ModeloDocReinfEntity;
+import br.com.pinhoinformatica.reinf.entity.tabelas.PaisesReinf;
+import br.com.pinhoinformatica.reinf.entity.tabelas.PaisesReinfEntity;
+import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbiente;
+import br.com.pinhoinformatica.reinf.entity.tabelas.TipoAmbienteEntity;
+import br.com.pinhoinformatica.reinf.entity.tabelas.TipoEmpresa;
+import br.com.pinhoinformatica.reinf.entity.tabelas.TipoEmpresaEntity;
 
 
 @MappedSuperclass
 public abstract class EmpresaReinf extends AppBaseEntity {
 
-	
+
 	@OneToMany (targetEntity = br.com.pinhoinformatica.reinf.entity.reinf.EmpresaContatoReinfEntity.class, fetch = FetchType.LAZY, cascade=CascadeType.ALL, mappedBy="empresaReinf")
 	@ForeignKey(name="FK_EMPRESACONTATOREINF_EMPRESAREINF")
 	@PlcValDuplicity(property="cpfContato")
 	@PlcValMultiplicity(referenceProperty="cpfContato",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaContatoReinfEntity}")
-	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaContatoReinf> empresaContatoReinf;
 
@@ -60,7 +61,6 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	@ForeignKey(name="FK_EMPRESASMTPREINF_EMPRESAREINF")
 	@PlcValDuplicity(property="smtpServer")
 	@PlcValMultiplicity(referenceProperty="smtpServer",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaSmtpReinfEntity}")
-	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaSmtpReinf> empresaSmtpReinf;
 
@@ -70,7 +70,6 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	@ForeignKey(name="FK_EMPRESAPROXYREINF_TBEMPRESA")
 	@PlcValDuplicity(property="proxyServer")
 	@PlcValMultiplicity(referenceProperty="proxyServer",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaProxyReinfEntity}")
-	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaProxyReinf> empresaProxyReinf;
 
@@ -80,7 +79,6 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	@ForeignKey(name="FK_EMPRESAPOPREINF_TBEMPRESA")
 	@PlcValDuplicity(property="popServer")
 	@PlcValMultiplicity(referenceProperty="popServer",  message="{jcompany.aplicacao.mestredetalhe.multiplicidade.EmpresaPopReinfEntity}")
-	@JoinColumn(name="ID_EMPRESA")
 	@Valid
 	private List<EmpresaPopReinf> empresaPopReinf;
 
@@ -483,7 +481,6 @@ public abstract class EmpresaReinf extends AppBaseEntity {
 	}
 
 	public void setEmpresaContatoReinf(List<EmpresaContatoReinf> empresaContatoReinf) {
-		this.empresaContatoReinf=empresaContatoReinf;
-	}
-
+		this.empresaContatoReinf = empresaContatoReinf;
+	}	
 }
